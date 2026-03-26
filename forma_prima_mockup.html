@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Forma Prima — Gráfica · Impressão Customizada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --carvao:     #1C1A17;
+    --carvao2:    #252220;
+    --carvao3:    #2E2B27;
+    --terra:      #C94F2C;
+    --terra2:     #E06042;
+    --creme:      #F4EFE8;
+    --creme2:     #EDE8E0;
+    --grafite:    #8A8276;
+    --grafite2:   #5A5750;
+    --ambar:      #E8C99A;
+    --branco:     #F0ECE6;
+    --radius-sm:  6px;
+    --radius-md:  10px;
+    --radius-lg:  14px;
+    --radius-xl:  20px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--carvao);
+    color: var(--branco);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ===================== NAVBAR ===================== */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--carvao);
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px; height: 64px;
+  }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 11px;
+    text-decoration: none;
+  }
+
+  .nav-logo-symbol { width: 30px; height: 30px; flex-shrink: 0; }
+
+  .nav-logo-text { display: flex; flex-direction: column; gap: 0; line-height: 1; }
+  .nav-logo-text .wordmark {
+    font-size: 13px; font-weight: 500; letter-spacing: .22em;
+    color: var(--branco); text-transform: uppercase;
+  }
+  .nav-logo-text .sub {
+    font-size: 7.5px; font-weight: 400; letter-spacing: .28em;
+    color: var(--terra2); text-transform: uppercase; margin-top: 2px;
+  }
+
+  .nav-links {
+    display: flex; gap: 36px; list-style: none;
+  }
+  .nav-links a {
+    font-size: 12.5px; font-weight: 400; letter-spacing: .04em;
+    color: var(--grafite); text-decoration: none;
+    transition: color .15s;
+  }
+  .nav-links a:hover { color: var(--branco); }
+
+  .nav-cta {
+    background: var(--terra); color: #fff;
+    font-size: 12px; font-weight: 500; letter-spacing: .06em;
+    padding: 10px 22px; border-radius: 100px;
+    border: none; cursor: pointer;
+    transition: background .15s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .nav-cta:hover { background: var(--terra2); }
+
+  /* ===================== HERO ===================== */
+  .hero {
+    background: var(--carvao);
+    padding: 80px 48px 90px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    min-height: calc(100vh - 64px);
+  }
+
+  .hero-left { display: flex; flex-direction: column; gap: 28px; }
+
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(201,79,44,.12);
+    border: 1px solid rgba(201,79,44,.28);
+    color: var(--terra2);
+    font-size: 10.5px; font-weight: 500; letter-spacing: .14em;
+    text-transform: uppercase;
+    padding: 7px 16px; border-radius: 100px;
+    width: fit-content;
+  }
+  .hero-tag::before {
+    content: '✦'; font-size: 8px;
+  }
+
+  .hero-h1 {
+    font-size: clamp(36px, 4.5vw, 52px);
+    font-weight: 500; line-height: 1.18; letter-spacing: -.01em;
+  }
+  .hero-h1 .light { color: var(--branco); }
+  .hero-h1 .accent { color: var(--terra); }
+
+  .hero-body {
+    font-size: 15px; font-weight: 300; color: var(--grafite);
+    line-height: 1.75; max-width: 400px; letter-spacing: .01em;
+  }
+
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: var(--terra); color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 500; letter-spacing: .04em;
+    padding: 14px 28px; border-radius: 100px; border: none; cursor: pointer;
+    transition: background .15s, transform .1s;
+  }
+  .btn-primary:hover { background: var(--terra2); transform: translateY(-1px); }
+
+  .btn-secondary {
+    background: transparent; color: var(--branco);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 400; letter-spacing: .04em;
+    padding: 14px 28px; border-radius: 100px;
+    border: 1px solid rgba(240,236,230,.18); cursor: pointer;
+    transition: border-color .15s, background .15s;
+  }
+  .btn-secondary:hover { border-color: rgba(240,236,230,.35); background: rgba(240,236,230,.04); }
+
+  /* Hero right — cards */
+  .hero-right { display: flex; flex-direction: column; gap: 10px; }
+
+  .hero-cards-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  }
+
+  .mat-card {
+    background: var(--carvao2);
+    border: 1px solid rgba(255,255,255,.07);
+    border-radius: var(--radius-lg);
+    padding: 18px 16px;
+    display: flex; flex-direction: column; gap: 10px;
+    transition: border-color .2s;
+    cursor: pointer;
+  }
+  .mat-card:hover { border-color: rgba(201,79,44,.4); }
+  .mat-card.accent {
+    background: var(--terra);
+    border-color: transparent;
+  }
+  .mat-card.accent:hover { border-color: transparent; opacity: .92; }
+
+  .mat-bar {
+    width: 28px; height: 3px; border-radius: 2px;
+    background: var(--branco); opacity: .35;
+  }
+  .mat-card.accent .mat-bar { opacity: .6; }
+
+  .mat-name {
+    font-size: 14px; font-weight: 500; color: var(--branco);
+    letter-spacing: .02em;
+  }
+  .mat-sub {
+    font-size: 11px; font-weight: 300; color: var(--grafite);
+    line-height: 1.5;
+  }
+  .mat-card.accent .mat-sub { color: rgba(255,255,255,.65); }
+
+  .hero-card-wide {
+    background: var(--carvao2);
+    border: 1px solid rgba(255,255,255,.07);
+    border-radius: var(--radius-lg);
+    padding: 16px 18px;
+    display: flex; align-items: center; gap: 16px;
+    transition: border-color .2s; cursor: pointer;
+  }
+  .hero-card-wide:hover { border-color: rgba(201,79,44,.35); }
+
+  .mdf-thumb {
+    width: 64px; height: 48px; flex-shrink: 0;
+    background: var(--ambar);
+    border-radius: var(--radius-sm);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 2px;
+  }
+  .mdf-thumb span {
+    font-size: 6.5px; font-weight: 500; letter-spacing: .12em;
+    color: #6a4820; text-transform: uppercase; text-align: center;
+    line-height: 1.4;
+  }
+
+  .wide-text .title { font-size: 13px; font-weight: 500; color: var(--branco); line-height: 1.4; }
+  .wide-text .sub   { font-size: 11px; font-weight: 300; color: var(--grafite); margin-top: 3px; }
+
+  /* ===================== MATERIAIS ===================== */
+  .section-materiais {
+    background: var(--creme);
+    padding: 64px 48px;
+  }
+
+  .section-head {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 28px;
+  }
+
+  .section-head h2 {
+    font-size: 26px; font-weight: 500; letter-spacing: -.01em;
+    color: var(--carvao);
+  }
+
+  .section-head a {
+    font-size: 12px; font-weight: 500; letter-spacing: .06em;
+    color: var(--terra); text-decoration: none;
+    transition: opacity .15s;
+  }
+  .section-head a:hover { opacity: .75; }
+
+  .mat-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+  }
+
+  .mat-item {
+    border-radius: var(--radius-lg); overflow: hidden;
+    border: 1px solid rgba(0,0,0,.08);
+    background: #fff;
+    cursor: pointer; transition: border-color .2s, transform .2s;
+  }
+  .mat-item:hover { border-color: var(--terra); transform: translateY(-2px); }
+
+  .mat-thumb {
+    height: 90px; display: flex; align-items: center; justify-content: center;
+  }
+
+  .mat-info { padding: 12px 14px 14px; }
+  .mat-info .name {
+    font-size: 13px; font-weight: 500; color: var(--carvao); letter-spacing: .02em;
+  }
+  .mat-info .desc {
+    font-size: 11px; color: var(--grafite); margin-top: 3px; letter-spacing: .02em;
+  }
+
+  /* ===================== COMO FUNCIONA ===================== */
+  .section-how {
+    background: var(--carvao2);
+    padding: 72px 48px;
+  }
+
+  .section-how h2 {
+    font-size: 26px; font-weight: 500; letter-spacing: -.01em;
+    color: var(--branco); margin-bottom: 40px;
+  }
+
+  .steps-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
+  }
+
+  .step { display: flex; flex-direction: column; gap: 14px; }
+
+  .step-num {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--terra); color: #fff;
+    font-size: 14px; font-weight: 500;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .step-title { font-size: 14px; font-weight: 500; color: var(--branco); }
+  .step-desc  { font-size: 12.5px; font-weight: 300; color: var(--grafite); line-height: 1.7; }
+
+  /* ===================== CTA BAND ===================== */
+  .cta-band-wrap { padding: 0 48px 64px; background: var(--carvao2); }
+
+  .cta-band {
+    background: var(--terra);
+    border-radius: var(--radius-xl);
+    padding: 36px 48px;
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  }
+
+  .cta-band h3 {
+    font-size: 22px; font-weight: 500; color: #fff; letter-spacing: -.01em;
+  }
+  .cta-band p {
+    font-size: 13px; font-weight: 300; color: rgba(255,255,255,.7);
+    margin-top: 6px;
+  }
+
+  .btn-cta-white {
+    background: #fff; color: var(--terra);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12.5px; font-weight: 500; letter-spacing: .05em;
+    padding: 13px 28px; border-radius: 100px; border: none; cursor: pointer;
+    white-space: nowrap; flex-shrink: 0;
+    transition: opacity .15s, transform .1s;
+  }
+  .btn-cta-white:hover { opacity: .9; transform: translateY(-1px); }
+
+  /* ===================== FOOTER ===================== */
+  footer {
+    background: var(--carvao);
+    border-top: 1px solid rgba(255,255,255,.05);
+    padding: 28px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .footer-copy {
+    font-size: 11px; color: var(--grafite2); letter-spacing: .05em;
+  }
+
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a {
+    font-size: 11px; color: var(--grafite2); text-decoration: none;
+    letter-spacing: .04em; transition: color .15s;
+  }
+  .footer-links a:hover { color: var(--grafite); }
+
+  /* ===================== DIVIDER SECTION ===================== */
+  .divider-band {
+    background: var(--carvao);
+    padding: 20px 48px;
+    border-top: 1px solid rgba(255,255,255,.04);
+    border-bottom: 1px solid rgba(255,255,255,.04);
+    display: flex; gap: 48px; overflow: hidden;
+  }
+  .divider-item {
+    font-size: 10.5px; font-weight: 500; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--grafite2);
+    white-space: nowrap; display: flex; align-items: center; gap: 12px;
+  }
+  .divider-item::before {
+    content: ''; width: 4px; height: 4px; background: var(--terra);
+    border-radius: 50%; flex-shrink: 0;
+  }
+
+  /* ===================== PORTFOLIO PREVIEW ===================== */
+  .section-portfolio {
+    background: var(--carvao);
+    padding: 72px 48px;
+  }
+  .section-portfolio .section-head h2 { color: var(--branco); }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 0;
+  }
+
+  .port-card {
+    border-radius: var(--radius-lg); overflow: hidden;
+    aspect-ratio: 4/3;
+    position: relative;
+    cursor: pointer;
+  }
+  .port-card:first-child { grid-row: span 2; aspect-ratio: unset; }
+
+  .port-thumb {
+    width: 100%; height: 100%;
+    display: flex; align-items: flex-end;
+    padding: 16px;
+    position: relative;
+    transition: opacity .2s;
+  }
+  .port-card:hover .port-thumb { opacity: .88; }
+
+  .port-tag {
+    font-size: 10px; font-weight: 500; letter-spacing: .1em;
+    text-transform: uppercase;
+    background: rgba(28,26,23,.65);
+    backdrop-filter: blur(4px);
+    color: var(--branco); padding: 5px 10px; border-radius: 6px;
+  }
+
+  /* ===================== TESTIMONIAL / STATS ===================== */
+  .section-stats {
+    background: var(--terra);
+    padding: 56px 48px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+  }
+
+  .stat-item {
+    display: flex; flex-direction: column; gap: 6px;
+    padding: 0 32px;
+    border-right: 1px solid rgba(255,255,255,.2);
+  }
+  .stat-item:first-child { padding-left: 0; }
+  .stat-item:last-child  { border-right: none; }
+
+  .stat-num {
+    font-size: 42px; font-weight: 500; color: #fff; letter-spacing: -.02em;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 12px; font-weight: 300; color: rgba(255,255,255,.7);
+    letter-spacing: .04em; line-height: 1.5;
+  }
+
+  /* ===================== SCROLL FADE IN ===================== */
+  .fade-in {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity .55s ease, transform .55s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* Stagger delays */
+  .fade-in:nth-child(2) { transition-delay: .08s; }
+  .fade-in:nth-child(3) { transition-delay: .16s; }
+  .fade-in:nth-child(4) { transition-delay: .24s; }
+
+  /* ===================== RESPONSIVE ===================== */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+
+    .hero { grid-template-columns: 1fr; padding: 48px 24px 56px; min-height: auto; gap: 40px; }
+
+    .section-materiais,
+    .section-how,
+    .section-portfolio,
+    .cta-band-wrap { padding-left: 24px; padding-right: 24px; }
+
+    .mat-grid { grid-template-columns: repeat(2, 1fr); }
+    .steps-grid { grid-template-columns: repeat(2, 1fr); }
+    .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+    .port-card:first-child { grid-row: span 1; aspect-ratio: 4/3; }
+    .section-stats { grid-template-columns: 1fr; gap: 28px; padding: 40px 24px; }
+    .stat-item { border-right: none; padding: 0; border-bottom: 1px solid rgba(255,255,255,.15); padding-bottom: 20px; }
+    .stat-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .cta-band { flex-direction: column; align-items: flex-start; gap: 20px; padding: 28px 24px; }
+
+    footer { flex-direction: column; gap: 16px; text-align: center; padding: 24px; }
+
+    .divider-band { gap: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- =================== NAVBAR =================== -->
+<nav>
+  <a href="#" class="nav-logo">
+    <svg class="nav-logo-symbol" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-label="Forma Prima símbolo">
+      <rect x="23" y="7" width="18" height="10" rx="2" fill="#E06042"/>
+      <rect x="20" y="9" width="3" height="6" rx="1" fill="#B83C1E"/>
+      <rect x="41" y="9" width="3" height="6" rx="1" fill="#B83C1E"/>
+      <polygon points="25,17 39,17 32,25" fill="#E06042"/>
+      <line x1="32" y1="25" x2="32" y2="46" stroke="#E06042" stroke-width="0.8" stroke-linecap="round"/>
+      <circle cx="32" cy="46" r="1.5" fill="#E06042"/>
+      <line x1="32" y1="46" x2="27" y2="43" stroke="#E06042" stroke-width="0.6" stroke-linecap="round" opacity="0.55"/>
+      <line x1="32" y1="46" x2="37" y2="43" stroke="#E06042" stroke-width="0.6" stroke-linecap="round" opacity="0.55"/>
+      <rect x="18" y="49" width="28" height="7" rx="1.5" fill="#F0ECE6"/>
+    </svg>
+    <div class="nav-logo-text">
+      <span class="wordmark">Forma</span>
+      <span class="sub">Prima</span>
+    </div>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#materiais">Materiais</a></li>
+    <li><a href="#produtos">Produtos</a></li>
+    <li><a href="#como-funciona">Como funciona</a></li>
+    <li><a href="#portfolio">Portfólio</a></li>
+  </ul>
+
+  <button class="nav-cta">Pedir orçamento</button>
+</nav>
+
+<!-- =================== HERO =================== -->
+<section class="hero">
+  <div class="hero-left">
+    <span class="hero-tag">Impressão customizada em Recife</span>
+
+    <h1 class="hero-h1">
+      <span class="light">Do jeito que você<br>imaginou. Em<br></span>
+      <span class="accent">qualquer material.</span>
+    </h1>
+
+    <p class="hero-body">
+      MDF, acrílico, tecido, UV e muito mais.<br>
+      Personalizamos para empresas, eventos e<br>presentear quem você ama.
+    </p>
+
+    <div class="hero-btns">
+      <button class="btn-primary">Pedir orçamento</button>
+      <button class="btn-secondary">Ver portfólio &nbsp;→</button>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-cards-grid">
+      <div class="mat-card">
+        <div class="mat-bar"></div>
+        <div class="mat-name">MDF</div>
+        <div class="mat-sub">Corte + impressão</div>
+      </div>
+      <div class="mat-card accent">
+        <div class="mat-bar"></div>
+        <div class="mat-name">Acrílico</div>
+        <div class="mat-sub">Transparente ou colorido</div>
+      </div>
+      <div class="mat-card">
+        <div class="mat-bar"></div>
+        <div class="mat-name">Tecido</div>
+        <div class="mat-sub">Sublimação</div>
+      </div>
+      <div class="mat-card">
+        <div class="mat-bar"></div>
+        <div class="mat-name">UV</div>
+        <div class="mat-sub">Alta definição</div>
+      </div>
+    </div>
+
+    <div class="hero-card-wide">
+      <div class="mdf-thumb">
+        <span>FORMA<br>PRIMA</span>
+      </div>
+      <div class="wide-text">
+        <div class="title">Placas, quadros, brindes e embalagens</div>
+        <div class="sub">Entrega para todo o Brasil</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== DIVIDER BAND =================== -->
+<div class="divider-band">
+  <div class="divider-item">Corte a laser</div>
+  <div class="divider-item">Impressão UV</div>
+  <div class="divider-item">Sublimação</div>
+  <div class="divider-item">MDF · Acrílico · Tecido</div>
+  <div class="divider-item">Entrega nacional</div>
+  <div class="divider-item">Personalizado</div>
+  <div class="divider-item">Corte a laser</div>
+  <div class="divider-item">Impressão UV</div>
+</div>
+
+<!-- =================== MATERIAIS =================== -->
+<section class="section-materiais" id="materiais">
+  <div class="section-head">
+    <h2>Escolha o material</h2>
+    <a href="#">Ver todos →</a>
+  </div>
+
+  <div class="mat-grid">
+    <div class="mat-item fade-in">
+      <div class="mat-thumb" style="background:#E8C99A;">
+        <svg width="56" height="40" viewBox="0 0 56 40">
+          <rect width="56" height="40" rx="4" fill="#D4B880"/>
+          <rect x="5" y="5" width="46" height="30" rx="3" fill="#E8C99A"/>
+          <text x="28" y="24" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="500" fill="#6A4820" letter-spacing="1">MDF</text>
+        </svg>
+      </div>
+      <div class="mat-info">
+        <div class="name">MDF</div>
+        <div class="desc">Placas · Quadros · Décor</div>
+      </div>
+    </div>
+
+    <div class="mat-item fade-in">
+      <div class="mat-thumb" style="background:#D8EEF7;">
+        <svg width="56" height="40" viewBox="0 0 56 40">
+          <rect width="56" height="40" rx="4" fill="#C8E4F0" opacity=".6"/>
+          <rect x="7" y="7" width="42" height="26" rx="3" fill="none" stroke="#5A9AB8" stroke-width="1.5"/>
+          <text x="28" y="24" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="7" font-weight="500" fill="#2A6A88" letter-spacing="1">ACRÍLICO</text>
+        </svg>
+      </div>
+      <div class="mat-info">
+        <div class="name">Acrílico</div>
+        <div class="desc">Letreiros · Displays</div>
+      </div>
+    </div>
+
+    <div class="mat-item fade-in">
+      <div class="mat-thumb" style="background:#F0E8E0;">
+        <svg width="56" height="40" viewBox="0 0 56 40">
+          <rect width="56" height="40" rx="4" fill="#E8DCD4"/>
+          <path d="M8 12 Q12 8 16 12 Q20 16 24 12 Q28 8 32 12 Q36 16 40 12 Q44 8 48 12" fill="none" stroke="#A08070" stroke-width="1.3"/>
+          <path d="M8 20 Q12 16 16 20 Q20 24 24 20 Q28 16 32 20 Q36 24 40 20 Q44 16 48 20" fill="none" stroke="#A08070" stroke-width="1.3"/>
+          <path d="M8 28 Q12 24 16 28 Q20 32 24 28 Q28 24 32 28 Q36 32 40 28 Q44 24 48 28" fill="none" stroke="#A08070" stroke-width="1.3"/>
+        </svg>
+      </div>
+      <div class="mat-info">
+        <div class="name">Tecido</div>
+        <div class="desc">Sublimação · Bandeiras</div>
+      </div>
+    </div>
+
+    <div class="mat-item fade-in">
+      <div class="mat-thumb" style="background:#1C1A17;">
+        <svg width="56" height="40" viewBox="0 0 56 40">
+          <rect width="56" height="40" rx="4" fill="#252220"/>
+          <rect x="10" y="10" width="36" height="20" rx="2" fill="#2E2B27"/>
+          <circle cx="28" cy="20" r="5" fill="none" stroke="#C94F2C" stroke-width="1.2"/>
+          <circle cx="28" cy="20" r="2" fill="#C94F2C"/>
+          <text x="28" y="36" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="5.5" fill="#5A5750" letter-spacing="1">IMPRESSÃO UV</text>
+        </svg>
+      </div>
+      <div class="mat-info" style="background:#252220;">
+        <div class="name" style="color:#F0ECE6;">Impressão UV</div>
+        <div class="desc">Alta def · Qualquer superfície</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== STATS =================== -->
+<section class="section-stats">
+  <div class="stat-item fade-in">
+    <div class="stat-num">+500</div>
+    <div class="stat-label">Pedidos personalizados<br>entregues todo mês</div>
+  </div>
+  <div class="stat-item fade-in">
+    <div class="stat-num">4</div>
+    <div class="stat-label">Tipos de material<br>disponíveis</div>
+  </div>
+  <div class="stat-item fade-in">
+    <div class="stat-num">2h</div>
+    <div class="stat-label">Orçamento enviado<br>sem compromisso</div>
+  </div>
+</section>
+
+<!-- =================== PORTFÓLIO =================== -->
+<section class="section-portfolio" id="portfolio">
+  <div class="section-head">
+    <h2>Portfólio</h2>
+    <a href="#" style="color:var(--terra)">Ver todos →</a>
+  </div>
+
+  <div class="portfolio-grid">
+    <div class="port-card fade-in">
+      <div class="port-thumb" style="background:#2A2620; min-height:260px; align-items:center; justify-content:center; flex-direction:column; gap:12px; display:flex;">
+        <div style="width:120px;height:80px;background:var(--ambar);border-radius:6px;display:flex;align-items:center;justify-content:center;">
+          <span style="font-size:9px;font-weight:500;letter-spacing:2px;color:#6A4820;text-transform:uppercase;text-align:center;line-height:1.6;">FORMA<br>PRIMA</span>
+        </div>
+        <span style="font-size:11px;color:var(--grafite);letter-spacing:.06em;">Placa MDF personalizada</span>
+      </div>
+    </div>
+
+    <div class="port-card fade-in">
+      <div class="port-thumb" style="background:#1e2e38; justify-content:center; align-items:center; display:flex;">
+        <svg width="80" height="60" viewBox="0 0 80 60">
+          <rect width="80" height="60" rx="4" fill="rgba(58,142,178,.08)"/>
+          <rect x="10" y="10" width="60" height="40" rx="3" fill="none" stroke="#5A9AB8" stroke-width="1.5"/>
+          <text x="40" y="34" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="500" fill="#90C8E0" letter-spacing="2">ACRÍLICO</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="port-card fade-in">
+      <div class="port-thumb" style="background:#2a2218; justify-content:center; align-items:center; display:flex;">
+        <svg width="80" height="60" viewBox="0 0 80 60">
+          <rect width="80" height="60" rx="4" fill="rgba(232,201,154,.08)"/>
+          <circle cx="40" cy="30" r="18" fill="none" stroke="#C94F2C" stroke-width="1"/>
+          <circle cx="40" cy="30" r="4" fill="#C94F2C"/>
+          <line x1="40" y1="12" x2="40" y2="24" stroke="#C94F2C" stroke-width=".8" opacity=".5"/>
+          <line x1="40" y1="36" x2="40" y2="48" stroke="#C94F2C" stroke-width=".8" opacity=".5"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="port-card fade-in">
+      <div class="port-thumb" style="background:#221a1a; justify-content:center; align-items:center; display:flex;">
+        <svg width="80" height="60" viewBox="0 0 80 60">
+          <rect width="80" height="60" rx="4" fill="rgba(201,79,44,.06)"/>
+          <rect x="15" y="15" width="50" height="30" rx="3" fill="var(--terra)" opacity=".15"/>
+          <text x="40" y="34" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="500" fill="#E06042" letter-spacing="1.5">IMPRESSÃO UV</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== COMO FUNCIONA =================== -->
+<section class="section-how" id="como-funciona">
+  <h2>Como funciona</h2>
+  <div class="steps-grid">
+    <div class="step fade-in">
+      <div class="step-num">1</div>
+      <div class="step-title">Escolha o material</div>
+      <div class="step-desc">MDF, acrílico, tecido, UV — selecione o que combina com o seu projeto.</div>
+    </div>
+    <div class="step fade-in">
+      <div class="step-num">2</div>
+      <div class="step-title">Envie sua arte</div>
+      <div class="step-desc">Suba o arquivo ou conte sua ideia — nossa equipe prepara o arquivo pra você.</div>
+    </div>
+    <div class="step fade-in">
+      <div class="step-num">3</div>
+      <div class="step-title">Aprovação e produção</div>
+      <div class="step-desc">Você aprova a prova digital antes de ir pra produção. Zero surpresas.</div>
+    </div>
+    <div class="step fade-in">
+      <div class="step-num">4</div>
+      <div class="step-title">Receba em casa</div>
+      <div class="step-desc">Enviamos para todo o Brasil. Retirada em Recife disponível.</div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== CTA BAND =================== -->
+<div class="cta-band-wrap">
+  <div class="cta-band">
+    <div>
+      <h3>Pronto para personalizar?</h3>
+      <p>Orçamento em até 2 horas. Sem compromisso.</p>
+    </div>
+    <button class="btn-cta-white">Pedir orçamento grátis</button>
+  </div>
+</div>
+
+<!-- =================== FOOTER =================== -->
+<footer>
+  <div class="footer-copy">© 2025 FORMA PRIMA &nbsp;·&nbsp; CNPJ 00.000.000/0001-00</div>
+  <nav class="footer-links">
+    <a href="#">Instagram</a>
+    <a href="#">Shopee</a>
+    <a href="#">WhatsApp</a>
+  </nav>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
