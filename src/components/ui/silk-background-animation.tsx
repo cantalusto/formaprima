@@ -1,133 +1,70 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 
 interface SilkBackgroundProps {
   className?: string;
 }
 
 export function SilkBackground({ className }: SilkBackgroundProps) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationRef = useRef<number>(undefined);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let time = 0;
-    const speed = 0.02;
-    const scale = 2;
-    const noiseIntensity = 0.8;
-
-    const resizeCanvas = () => {
-      const parent = canvas.parentElement;
-      if (parent) {
-        canvas.width = parent.clientWidth;
-        canvas.height = parent.clientHeight;
-      }
-    };
-
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    const noise = (x: number, y: number) => {
-      const G = 2.71828;
-      const rx = G * Math.sin(G * x);
-      const ry = G * Math.sin(G * y);
-      return (rx * ry * (1 + x)) % 1;
-    };
-
-    const animate = () => {
-      const { width, height } = canvas;
-
-      const gradient = ctx.createLinearGradient(0, 0, width, height);
-      gradient.addColorStop(0, '#1C1A17');
-      gradient.addColorStop(0.5, '#252220');
-      gradient.addColorStop(1, '#1C1A17');
-
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, width, height);
-
-      const imageData = ctx.createImageData(width, height);
-      const data = imageData.data;
-
-      for (let x = 0; x < width; x += 2) {
-        for (let y = 0; y < height; y += 2) {
-          const u = (x / width) * scale;
-          const v = (y / height) * scale;
-
-          const tOffset = speed * time;
-          const tex_x = u;
-          const tex_y = v + 0.03 * Math.sin(8.0 * tex_x - tOffset);
-
-          const pattern =
-            0.6 +
-            0.4 *
-              Math.sin(
-                5.0 *
-                  (tex_x +
-                    tex_y +
-                    Math.cos(3.0 * tex_x + 5.0 * tex_y) +
-                    0.02 * tOffset) +
-                  Math.sin(20.0 * (tex_x + tex_y - 0.1 * tOffset))
-              );
-
-          const rnd = noise(x, y);
-          const intensity = Math.max(0, pattern - (rnd / 15.0) * noiseIntensity);
-
-          // Warm dark tones matching #1C1A17 palette
-          const r = Math.floor(60 * intensity);
-          const g = Math.floor(52 * intensity);
-          const b = Math.floor(44 * intensity);
-
-          const index = (y * width + x) * 4;
-          if (index < data.length) {
-            data[index] = r;
-            data[index + 1] = g;
-            data[index + 2] = b;
-            data[index + 3] = 255;
-          }
-        }
-      }
-
-      ctx.putImageData(imageData, 0, 0);
-
-      const overlayGradient = ctx.createRadialGradient(
-        width / 2,
-        height / 2,
-        0,
-        width / 2,
-        height / 2,
-        Math.max(width, height) / 2
-      );
-      overlayGradient.addColorStop(0, 'rgba(0, 0, 0, 0.05)');
-      overlayGradient.addColorStop(1, 'rgba(0, 0, 0, 0.35)');
-
-      ctx.fillStyle = overlayGradient;
-      ctx.fillRect(0, 0, width, height);
-
-      time += 1;
-      animationRef.current = requestAnimationFrame(animate);
-    };
-
-    animate();
-
-    return () => {
-      window.removeEventListener('resize', resizeCanvas);
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-    };
-  }, []);
-
   return (
-    <canvas
-      ref={canvasRef}
+    <div
       className={className}
-      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
-    />
+      style={{
+        position: 'absolute',
+        inset: 0,
+        width: '100%',
+        height: '100%',
+        overflow: 'hidden',
+      }}
+    >
+      {/* Base gradient */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(135deg, #1C1A17, #252220 50%, #1C1A17)',
+        }}
+      />
+      {/* Animated silk waves via CSS */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: '-50%',
+          width: '200%',
+          height: '200%',
+          background: `
+            radial-gradient(ellipse 80% 50% at 30% 20%, rgba(60, 52, 44, 0.12) 0%, transparent 60%),
+            radial-gradient(ellipse 60% 40% at 70% 60%, rgba(50, 42, 36, 0.10) 0%, transparent 55%),
+            radial-gradient(ellipse 90% 60% at 50% 80%, rgba(40, 35, 30, 0.08) 0%, transparent 50%)
+          `,
+          animation: 'silk-drift 20s ease-in-out infinite alternate',
+          willChange: 'transform',
+        }}
+      />
+      {/* Secondary layer for depth */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: '-30%',
+          width: '160%',
+          height: '160%',
+          background: `
+            radial-gradient(ellipse 70% 50% at 60% 30%, rgba(55, 48, 40, 0.08) 0%, transparent 50%),
+            radial-gradient(ellipse 50% 40% at 35% 70%, rgba(45, 38, 32, 0.06) 0%, transparent 45%)
+          `,
+          animation: 'silk-drift-reverse 25s ease-in-out infinite alternate',
+          willChange: 'transform',
+        }}
+      />
+      {/* Vignette */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.03), rgba(0,0,0,0.25))',
+        }}
+      />
+    </div>
   );
 }

@@ -35,7 +35,7 @@ function Logo() {
       </svg>
       <div className="flex flex-col leading-none">
         <span className="text-white font-semibold uppercase text-[13px] tracking-[0.15em]">
-          FÓRMULA
+          FORMA
         </span>
         <span className="text-white font-semibold uppercase text-[13px] tracking-[0.15em]">
           PRIMA
@@ -67,9 +67,9 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 mx-auto w-full max-w-6xl border-b border-transparent md:rounded-md md:border md:transition-all md:duration-300 md:ease-out",
+        "sticky top-0 z-50 mx-auto w-full max-w-6xl border-b border-transparent md:rounded-md md:border md:duration-300 md:ease-out md:transition-[max-width,top,box-shadow,border-color]",
         {
-          "border-white/[0.06] backdrop-blur-lg md:top-4 md:max-w-5xl md:shadow-lg md:shadow-black/20":
+          "border-white/[0.06] md:top-4 md:max-w-5xl md:shadow-lg md:shadow-black/20":
             scrolled && !open,
           "bg-[#1C1A17]/90": open,
         }
@@ -84,7 +84,7 @@ export function Navbar() {
     >
       <nav
         className={cn(
-          "flex h-16 w-full items-center justify-between px-6 md:px-8 md:transition-all md:duration-300 md:ease-out",
+          "flex h-16 w-full items-center justify-between px-6 md:px-8 md:duration-300 md:ease-out md:transition-[height,padding]",
           { "md:h-14 md:px-4": scrolled }
         )}
       >

@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { DM_Sans, DM_Mono } from "next/font/google";
+import { SmoothScroll } from "@/components/SmoothScroll";
 import "./globals.css";
 
 const dmSans = DM_Sans({
   variable: "--font-sans",
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 const dmMono = DM_Mono({
@@ -30,6 +31,7 @@ export default function RootLayout({
       className={`${dmSans.variable} ${dmMono.variable} antialiased`}
     >
       <body className="bg-carvao text-branco font-sans overflow-x-hidden">
+        <SmoothScroll />
         {children}
       </body>
     </html>

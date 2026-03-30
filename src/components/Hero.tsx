@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { AnimatedButton } from "@/components/AnimatedButton";
 import { SilkBackground } from "@/components/ui/silk-background-animation";
+import AnimatedTextCycle from "@/components/ui/animated-text-cycle";
 
 interface MaterialCardProps {
   name: string;
@@ -124,6 +125,7 @@ export function Hero() {
           initial="hidden"
           animate="visible"
           variants={heroLeftVariants}
+          className="relative"
           style={{
             fontSize: "clamp(38px, 4.5vw, 52px)",
             fontWeight: 700,
@@ -132,9 +134,20 @@ export function Hero() {
           }}
         >
           <span style={{ color: "#F0ECE6" }}>
-            Do jeito que você imaginou.{" "}
+            Impressão personalizada
           </span>
-          <span style={{ color: "#C94F2C" }}>Em qualquer material.</span>
+          <br />
+          <AnimatedTextCycle
+            words={[
+              "em MDF.",
+              "em acrílico.",
+              "em tecido.",
+              "em UV.",
+              "sob medida.",
+            ]}
+            interval={3000}
+            className="text-terra"
+          />
         </motion.h1>
 
         <motion.p

@@ -1,7 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
-
 const items = [
   "Corte a laser",
   "Impressão UV",
@@ -22,24 +20,20 @@ function DividerItem({ text }: { text: string }) {
 }
 
 export function DividerBand() {
-  // Duplicate items for seamless loop
   const duplicatedItems = [...items, ...items];
 
   return (
     <div className="bg-carvao py-5 border-y border-white/[0.04] overflow-hidden">
-      <motion.div
-        className="flex gap-7 md:gap-12"
-        animate={{ x: ["0%", "-50%"] }}
-        transition={{
-          duration: 18,
-          repeat: Infinity,
-          ease: "linear",
+      <div
+        className="flex gap-7 md:gap-12 will-change-transform"
+        style={{
+          animation: "divider-scroll 18s linear infinite",
         }}
       >
         {duplicatedItems.map((item, index) => (
           <DividerItem key={index} text={item} />
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 }

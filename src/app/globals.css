@@ -57,6 +57,7 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 80px;
   }
 
   body {
@@ -84,3 +85,30 @@
 .animation-delay-1 { animation-delay: 0.08s; }
 .animation-delay-2 { animation-delay: 0.16s; }
 .animation-delay-3 { animation-delay: 0.24s; }
+
+@keyframes divider-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes silk-drift {
+  from {
+    transform: translate(0%, 0%) rotate(0deg);
+  }
+  to {
+    transform: translate(5%, 3%) rotate(2deg);
+  }
+}
+
+@keyframes silk-drift-reverse {
+  from {
+    transform: translate(0%, 0%) rotate(0deg);
+  }
+  to {
+    transform: translate(-4%, 2%) rotate(-1.5deg);
+  }
+}
