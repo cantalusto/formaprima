@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { AnimatedButton } from "@/components/AnimatedButton";
-import { SilkBackground } from "@/components/ui/silk-background-animation";
+import { SmokeBackground } from "@/components/ui/spooky-smoke-animation";
 import AnimatedTextCycle from "@/components/ui/animated-text-cycle";
 
 interface MaterialCardProps {
@@ -106,12 +106,14 @@ export function Hero() {
         minHeight: "calc(100vh - 64px)",
       }}
     >
-      <SilkBackground />
+      <div className="absolute inset-0 opacity-40">
+        <SmokeBackground smokeColor="#C94F2C" />
+      </div>
       <div
         className="absolute inset-0 z-10 pointer-events-none"
         style={{
           background:
-            "linear-gradient(to bottom, rgba(28,26,23,0.3), transparent 40%, rgba(28,26,23,0.5))",
+            "linear-gradient(to bottom, rgba(28,26,23,0.6), rgba(28,26,23,0.3) 40%, rgba(28,26,23,0.7))",
         }}
       />
       <div
