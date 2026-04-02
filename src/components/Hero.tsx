@@ -117,8 +117,8 @@ export function Hero() {
         }}
       />
       <div
-        className="relative z-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
-        style={{ padding: "80px 48px", minHeight: "calc(100vh - 64px)" }}
+        className="relative z-20 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center px-6 py-16 md:px-12 lg:px-12"
+        style={{ minHeight: "calc(100vh - 64px)" }}
       >
       {/* Left side */}
       <div className="flex flex-col">

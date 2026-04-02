@@ -8,10 +8,10 @@ import { MenuToggleIcon } from "@/components/ui/menu-toggle-icon";
 import { useScroll } from "@/components/ui/use-scroll";
 
 const links = [
-  { href: "#materiais", label: "Materiais" },
-  { href: "#produtos", label: "Produtos" },
-  { href: "#como-funciona", label: "Como funciona" },
-  { href: "#portfolio", label: "Portfólio" },
+  { href: "/materiais", label: "Materiais" },
+  { href: "/portfolio", label: "Portfólio" },
+  { href: "/orcamento", label: "Orçamento" },
+  { href: "/contato", label: "Contato" },
 ];
 
 function Logo() {
@@ -92,16 +92,16 @@ export function Navbar() {
 
         <div className="hidden items-center gap-1 md:flex">
           {links.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className={cn(
                 buttonVariants({ variant: "ghost", size: "default" }),
-                "text-[13px] font-normal text-[#8A8276] hover:text-white hover:bg-white/[0.06]"
+                "text-[13px] font-normal text-[#8A8276] hover:text-white hover:bg-white/[0.06] no-underline"
               )}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
 
           <div
@@ -112,12 +112,13 @@ export function Navbar() {
                 : "max-w-0 opacity-0"
             )}
           >
-            <Button
-              className="h-auto whitespace-nowrap text-white text-[13px] font-medium rounded-full px-5 py-2 border-none"
+            <Link
+              href="/orcamento"
+              className="h-auto whitespace-nowrap text-white text-[13px] font-medium rounded-full px-5 py-2 no-underline inline-flex items-center"
               style={{ background: "#C94F2C" }}
             >
               Pedir orçamento
-            </Button>
+            </Link>
           </div>
         </div>
 
@@ -148,17 +149,17 @@ export function Navbar() {
         >
           <div className="grid gap-y-1">
             {links.map((link) => (
-              <a
+              <Link
                 key={link.label}
                 href={link.href}
                 onClick={() => setOpen(false)}
                 className={cn(
                   buttonVariants({ variant: "ghost" }),
-                  "justify-start text-[15px] text-[#8A8276] hover:text-white hover:bg-white/[0.06]"
+                  "justify-start text-[15px] text-[#8A8276] hover:text-white hover:bg-white/[0.06] no-underline"
                 )}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
           <div className="flex flex-col gap-3">

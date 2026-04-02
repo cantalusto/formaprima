@@ -5,7 +5,7 @@ import { AnimatedButton } from "@/components/AnimatedButton";
 
 export function CTABand() {
   return (
-    <div className="bg-carvao2 px-6 md:px-12 pb-16">
+    <div className="bg-creme px-6 md:px-12 py-6">
       <motion.div
         initial={{ y: 32, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
