@@ -17,7 +17,7 @@ const portfolioItems = [
           </span>
         </div>
         <span className="text-[11px] text-grafite tracking-[0.06em]">
-          Placa MDF personalizada
+          Quadrinho Wi-Fi em MDF
         </span>
       </div>
     ),
@@ -47,7 +47,7 @@ const portfolioItems = [
           fill="#90C8E0"
           letterSpacing="2"
         >
-          ACRÍLICO
+          LETREIRO
         </text>
       </svg>
     ),
@@ -96,7 +96,7 @@ const portfolioItems = [
           fill="#E06042"
           letterSpacing="1.5"
         >
-          IMPRESSÃO UV
+          CAIXA MDF
         </text>
       </svg>
     ),

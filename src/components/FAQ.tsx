@@ -5,24 +5,29 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const faqs = [
   {
-    question: "Prazo de produção",
+    question: "Quais produtos vocês fazem?",
     answer:
-      "A produção padrão leva de 3 a 5 dias úteis, dependendo da complexidade do projeto e do material. Trabalhamos para garantir que cada peça passe por nossa rigorosa verificação de qualidade antes da conclusão.",
+      "Trabalhamos com corte a laser em MDF (quadrinhos Wi-Fi, caixas, tábuas, chaveiros, nomes, suportes, mandalas, linha pet), acrílico (expositores para óticas, troféus, letras, painel ripado), letreiros para empresas (salão, loja, consultório), placas em ACM interno e externo, placas ABC de formatura, lonas com ou sem ilhós, adesivos (papel de parede, leitoso, transparente, perfurado), luminárias e sublimação (azulejos, canecas e almofadas).",
   },
   {
-    question: "Requisitos de arquivo",
+    question: "Prazo de produção e entrega",
     answer:
-      "Aceitamos arquivos em PDF, AI, CDR, PNG e JPG com resolução mínima de 300dpi. Para corte a laser, envie o arquivo vetorizado. Se não tiver o arquivo pronto, nossa equipe pode preparar a arte para você.",
+      "A produção padrão leva de 3 a 5 dias úteis, dependendo da complexidade e do material. Peças mais elaboradas (letreiros iluminados, painéis, fachadas em ACM) podem levar um pouco mais. Fale com a gente e passamos o prazo exato do seu projeto.",
   },
   {
-    question: "Escolha de material",
+    question: "Como envio o arquivo?",
     answer:
-      "Oferecemos MDF, acrílico (transparente, colorido, espelhado), tecido para sublimação, e impressão UV em qualquer superfície rígida. Cada material é ideal para diferentes aplicações — entre em contato para orientação personalizada.",
+      "Aceitamos PDF, AI, CDR, PNG e JPG em 300dpi. Para corte a laser, o ideal é um vetor (AI ou CDR). Se você não tem a arte pronta, nossa equipe prepara pra você — é só nos enviar a ideia, o nome ou a foto.",
   },
   {
-    question: "Entrega e frete",
+    question: "Vocês atendem fora de Recife?",
     answer:
-      "Enviamos para todo o Brasil via transportadora ou Correios. Retirada em Recife disponível sem custo. O valor do frete é calculado no orçamento conforme CEP e peso da encomenda.",
+      "Sim! Retirada grátis no nosso estúdio em Recife e envio para todo o Brasil via transportadora ou Correios. O frete é calculado no orçamento de acordo com o CEP e o peso.",
+  },
+  {
+    question: "Fazem quantidade pequena ou só atacado?",
+    answer:
+      "Fazemos tanto unidades avulsas (um presente, um nome de bebê, uma placa) quanto lotes grandes para empresas, eventos e lembrancinhas. Há desconto progressivo por volume.",
   },
 ];
 

@@ -1,23 +1,72 @@
+import type { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import Link from "next/link";
 
-const categories = ["Todos", "MDF", "Acrílico", "Tecido", "UV"];
+export const metadata: Metadata = {
+  title: "Portfólio",
+  description:
+    "Veja projetos que já entregamos: placas, displays, brindes corporativos, letreiros, ecobags e muito mais.",
+  openGraph: {
+    title: "Portfólio · Forma Prima",
+    description:
+      "Projetos personalizados em MDF, acrílico, tecido e UV realizados para nossos clientes.",
+  },
+};
+
+const categories = [
+  "Todos",
+  "MDF",
+  "Acrílico",
+  "Letreiros",
+  "Placas",
+  "Adesivos",
+  "Sublimação",
+];
 
 const projects = [
-  { title: "Placa decorativa personalizada", category: "MDF", color: "#3A3228", accent: "#E8C99A" },
-  { title: "Display corporativo", category: "Acrílico", color: "#2A3038", accent: "#5A9AB8" },
-  { title: "Bandeira sublimada", category: "Tecido", color: "#2E2A24", accent: "#A08070" },
-  { title: "Brinde evento XPTO", category: "UV", color: "#34302C", accent: "#C94F2C" },
-  { title: "Letreiro recepção", category: "Acrílico", color: "#283038", accent: "#7ABCD8" },
-  { title: "Kit presente aniversário", category: "MDF", color: "#382E24", accent: "#D4B880" },
-  { title: "Ecobag promocional", category: "Tecido", color: "#2C2824", accent: "#B89880" },
-  { title: "Placa endereço residencial", category: "UV", color: "#302828", accent: "#E06042" },
-  { title: "Troféu corporativo", category: "Acrílico", color: "#2A2E34", accent: "#90C8E0" },
-  { title: "Quadro MDF gravado", category: "MDF", color: "#342E26", accent: "#C8A868" },
-  { title: "Camiseta time empresa", category: "Tecido", color: "#2A2622", accent: "#C09070" },
-  { title: "Impressão em madeira", category: "UV", color: "#2E2A26", accent: "#D06040" },
+  // MDF / corte a laser
+  { title: "Quadrinho com Wi-Fi, Instagram e Pix", category: "MDF", color: "#3A3228", accent: "#E8C99A" },
+  { title: "Nome em MDF com relevo iluminado", category: "MDF", color: "#342E26", accent: "#C8A868" },
+  { title: "Caixa personalizada em MDF", category: "MDF", color: "#382E24", accent: "#D4B880" },
+  { title: "Tábua personalizada para presente", category: "MDF", color: "#34302C", accent: "#C09878" },
+  { title: "Porta copos gravados a laser", category: "MDF", color: "#302A22", accent: "#B89060" },
+  { title: "Chaveiros personalizados em MDF", category: "MDF", color: "#2E2820", accent: "#D0A868" },
+  { title: "Suporte para celular e notebook", category: "MDF", color: "#322C24", accent: "#C89868" },
+  { title: "Mandala decorativa vazada", category: "MDF", color: "#2C2620", accent: "#B08050" },
+  { title: "Letras grandes decorativas", category: "MDF", color: "#362E26", accent: "#D8B878" },
+  { title: "Plaquinha com nome do pet", category: "MDF", color: "#302820", accent: "#C0A070" },
+
+  // Acrílico
+  { title: "Expositor de óculos para ótica", category: "Acrílico", color: "#2A3038", accent: "#7ABCD8" },
+  { title: "Painel de ótica em acrílico", category: "Acrílico", color: "#283038", accent: "#5A9AB8" },
+  { title: "Troféu corporativo em acrílico", category: "Acrílico", color: "#2A2E34", accent: "#90C8E0" },
+  { title: "Letras em acrílico para loja", category: "Acrílico", color: "#263038", accent: "#88C0D8" },
+
+  // Letreiros
+  { title: "Letreiro para salão de beleza", category: "Letreiros", color: "#2C2822", accent: "#E06042" },
+  { title: "Letreiro iluminado para consultório", category: "Letreiros", color: "#302822", accent: "#D85030" },
+  { title: "Painel ripado para recepção", category: "Letreiros", color: "#342C22", accent: "#B88040" },
+  { title: "Nome de família em MDF (Família Silva)", category: "Letreiros", color: "#322A22", accent: "#C8A060" },
+
+  // Placas
+  { title: "Placa em ACM para fachada externa", category: "Placas", color: "#2A2E34", accent: "#90A8B8" },
+  { title: "Placa ABC para formatura", category: "Placas", color: "#2C2A26", accent: "#D4B080" },
+  { title: "Placas de promoção para loja", category: "Placas", color: "#302822", accent: "#E06042" },
+  { title: "Mini placas com QR code", category: "Placas", color: "#2E2822", accent: "#C88050" },
+  { title: "Placa para porta de quarto de bebê", category: "Placas", color: "#342E28", accent: "#E8C0A0" },
+
+  // Adesivos & Lonas
+  { title: "Papel de parede personalizado", category: "Adesivos", color: "#2C2824", accent: "#B89878" },
+  { title: "Adesivo perfurado para vitrine", category: "Adesivos", color: "#2A2622", accent: "#A88868" },
+  { title: "Lona personalizada com ilhós", category: "Adesivos", color: "#302824", accent: "#C89070" },
+  { title: "Luminária personalizada", category: "Adesivos", color: "#34281E", accent: "#F0A848" },
+
+  // Sublimação
+  { title: "Azulejo personalizado com foto", category: "Sublimação", color: "#2E2A24", accent: "#A08070" },
+  { title: "Caneca personalizada", category: "Sublimação", color: "#2C2822", accent: "#B89080" },
+  { title: "Almofada sublimada", category: "Sublimação", color: "#322A24", accent: "#C89880" },
 ];
 
 export default function PortfolioPage() {

@@ -1,38 +1,78 @@
+import type { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import Link from "next/link";
 
+export const metadata: Metadata = {
+  title: "Materiais",
+  description:
+    "Conheça nossos materiais: MDF, acrílico, tecido e impressão UV. Corte a laser, sublimação e gravação de alta precisão.",
+  openGraph: {
+    title: "Materiais · Forma Prima",
+    description:
+      "MDF, acrílico, tecido e impressão UV. O material certo para cada projeto.",
+  },
+};
+
 const materials = [
   {
     name: "MDF",
     tagline: "Corte e gravação a laser",
-    description: "Ideal para placas decorativas, quadros personalizados, letreiros e presentes criativos. Disponível em diversas espessuras.",
-    specs: ["Espessuras: 3mm, 6mm, 9mm", "Corte a laser de precisão", "Gravação vetorial e raster", "Acabamento natural ou pintado"],
+    description:
+      "Nosso carro-chefe. Do quadrinho de Wi-Fi ao letreiro iluminado, trabalhamos MDF com corte e gravação de precisão para decoração, presentes e identidade visual.",
+    specs: [
+      "Quadrinhos (Wi-Fi, Instagram, Pix) e placas com QR code",
+      "Nomes em MDF com relevo ou fundo iluminado",
+      "Caixas personalizadas, tábuas, porta copos e chaveiros",
+      "Suportes (celular, notebook, controle remoto)",
+      "Mandalas, peças religiosas, paisagens e letras grandes",
+      "Linha pet: plaquinha com nome, porta coleira e comedouro",
+    ],
     bgColor: "#E8C99A",
     textColor: "#6A4820",
   },
   {
     name: "Acrílico",
-    tagline: "Transparente ou colorido",
-    description: "Perfeito para displays corporativos, letreiros elegantes, troféus e peças de decoração com acabamento premium.",
-    specs: ["Transparente, branco, preto, colorido", "Espessuras: 2mm a 10mm", "Corte e gravação a laser", "Polimento nas bordas"],
+    tagline: "Transparente, colorido ou espelhado",
+    description:
+      "Acabamento premium para ambientes comerciais. Ideal para óticas, lojas, consultórios e troféus corporativos.",
+    specs: [
+      "Expositor de óculos de mesa e painéis para óticas",
+      "Letras e letreiros para fachadas e recepções",
+      "Troféus e placas de homenagem",
+      "Painel ripado para ambientes comerciais",
+      "Espessuras de 2mm a 10mm, corte e gravação a laser",
+    ],
     bgColor: "#D8EEF7",
     textColor: "#2A6A88",
   },
   {
-    name: "Tecido",
-    tagline: "Sublimação têxtil",
-    description: "Sublimação em alta qualidade para bandeiras, almofadas, ecobags, camisetas e tecidos decorativos sob medida.",
-    specs: ["Sublimação full-color", "Poliéster e algodão", "Sem limite de cores", "Lavável e durável"],
+    name: "ACM, Lonas & Adesivos",
+    tagline: "Comunicação visual externa e interna",
+    description:
+      "Soluções completas de comunicação visual para fachadas, vitrines, eventos e decoração de ambientes.",
+    specs: [
+      "Placas em ACM (interno e externo) e placas ABC de formatura",
+      "Placas de promoção, mini placas e placas para porta",
+      "Lonas personalizadas com ou sem ilhós",
+      "Adesivos: papel de parede, leitoso, transparente e perfurado",
+      "Luminárias personalizadas",
+    ],
     bgColor: "#F0E8E0",
     textColor: "#7A6050",
   },
   {
-    name: "Impressão UV",
-    tagline: "Alta definição em qualquer superfície",
-    description: "Impressão direta em superfícies rígidas: madeira, metal, vidro, plástico. Cores vibrantes e alta durabilidade.",
-    specs: ["Qualquer superfície rígida", "CMYK + branco", "Resistente a UV e água", "Resolução até 1440 dpi"],
+    name: "Sublimação",
+    tagline: "Foto e cor em alta definição",
+    description:
+      "Transferimos suas fotos, artes e logos com cores vivas e durabilidade para presentes únicos e brindes corporativos.",
+    specs: [
+      "Azulejos personalizados com fotos",
+      "Canecas personalizadas",
+      "Almofadas sublimadas",
+      "Sem limite de cores, acabamento profissional",
+    ],
     bgColor: "#1C1A17",
     textColor: "#C94F2C",
     dark: true,

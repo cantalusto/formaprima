@@ -91,11 +91,11 @@ export function Collections() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
-        {/* Card 1 - Placas personalizadas (large) */}
+        {/* Card 1 - Quadrinhos Wi-Fi / Instagram / Pix (large) */}
         <CollectionCard
-          label="Presentes"
-          title="Placas personalizadas"
-          subtitle="MDF · Corte e gravação laser"
+          label="Mais pedido"
+          title="Quadrinhos Wi-Fi, Insta & Pix"
+          subtitle="MDF · Corte e gravação a laser"
           bgColor="#3A3228"
           span="md:row-span-2"
           index={0}
@@ -131,17 +131,17 @@ export function Collections() {
                 opacity="0.5"
                 letterSpacing="2"
               >
-                FÓRMULA PRIMA
+                FORMA PRIMA WI-FI
               </text>
             </svg>
           }
         />
 
-        {/* Card 2 - Acrílico corporativo */}
+        {/* Card 2 - Letreiros e fachadas */}
         <CollectionCard
-          label="Corporativo"
-          title="Acrílico corporativo"
-          subtitle="Transparente ou colorido"
+          label="Empresas"
+          title="Letreiros & fachadas"
+          subtitle="Salão, loja, consultório · MDF e ACM"
           bgColor="#2A3038"
           index={1}
           icon={
@@ -178,11 +178,11 @@ export function Collections() {
           }
         />
 
-        {/* Card 3 - Brindes promocionais */}
+        {/* Card 3 - Caixas e presentes */}
         <CollectionCard
-          label="Eventos"
-          title="Brindes promocionais"
-          subtitle="Impressão UV · Alta definição"
+          label="Presentes"
+          title="Caixas & tábuas"
+          subtitle="MDF gravado · Lembranças e presentes"
           bgColor="#38302A"
           index={2}
           icon={
@@ -231,11 +231,11 @@ export function Collections() {
           }
         />
 
-        {/* Card 4 - Sublimação em tecido */}
+        {/* Card 4 - Acrílico para óticas e troféus */}
         <CollectionCard
-          label="Decoração"
-          title="Sublimação em tecido"
-          subtitle="Bandeiras · Almofadas · Ecobags"
+          label="Acrílico"
+          title="Expositores & troféus"
+          subtitle="Óticas, lojas e homenagens"
           bgColor="#2E2A24"
           index={3}
           icon={
@@ -258,11 +258,11 @@ export function Collections() {
           }
         />
 
-        {/* Card 5 - Tumblers */}
+        {/* Card 5 - Sublimação */}
         <CollectionCard
-          label="Produtos"
-          title="Tumblers"
-          subtitle="Aço inox · Parede dupla"
+          label="Sublimação"
+          title="Canecas, azulejos & almofadas"
+          subtitle="Foto personalizada em alta definição"
           bgColor="#34302C"
           index={4}
           icon={

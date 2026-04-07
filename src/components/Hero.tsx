@@ -143,8 +143,9 @@ export function Hero() {
             words={[
               "em MDF.",
               "em acrílico.",
-              "em tecido.",
-              "em UV.",
+              "em ACM.",
+              "para sua loja.",
+              "para presentear.",
               "sob medida.",
             ]}
             interval={3000}
@@ -166,8 +167,8 @@ export function Hero() {
             maxWidth: "420px",
           }}
         >
-          Impressão personalizada para empresas, eventos e
-          presentear. MDF, acrílico, tecido, UV e muito mais.
+          Corte a laser, letreiros, placas, caixas, sublimação e
+          comunicação visual. Para sua loja, seu evento e quem você ama.
         </motion.p>
 
         <motion.div
@@ -213,14 +214,14 @@ export function Hero() {
           index={1}
         />
         <MaterialCard
-          name="Tecido"
-          subtitle="Sublimação"
+          name="ACM & Lonas"
+          subtitle="Fachadas e placas"
           icon={<TecidoIcon />}
           index={2}
         />
         <MaterialCard
-          name="UV"
-          subtitle="Alta definição"
+          name="Sublimação"
+          subtitle="Canecas, azulejos"
           icon={<UvIcon />}
           index={3}
         />

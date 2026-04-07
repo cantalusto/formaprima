@@ -15,9 +15,51 @@ const dmMono = DM_Mono({
   weight: ["400", "500"],
 });
 
+const siteUrl = "https://formaprima.com.br";
+
 export const metadata: Metadata = {
-  title: "Forma Prima — Gráfica · Impressão Customizada",
-  description: "Impressão customizada em MDF, acrílico, tecido, UV e muito mais. Personalizamos para empresas, eventos e presentear quem você ama.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "Forma Prima — Gráfica · Impressão Customizada",
+    template: "%s · Forma Prima",
+  },
+  description:
+    "Impressão customizada em MDF, acrílico, tecido, UV e muito mais. Personalizamos para empresas, eventos e presentear quem você ama.",
+  keywords: [
+    "impressão personalizada",
+    "gráfica Recife",
+    "MDF personalizado",
+    "corte a laser",
+    "impressão UV",
+    "sublimação",
+    "acrílico personalizado",
+    "brindes corporativos",
+  ],
+  authors: [{ name: "Forma Prima" }],
+  creator: "Forma Prima",
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    url: siteUrl,
+    siteName: "Forma Prima",
+    title: "Forma Prima — Gráfica · Impressão Customizada",
+    description:
+      "Impressão customizada em MDF, acrílico, tecido, UV e muito mais. Orçamento em até 2 horas.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Forma Prima — Gráfica · Impressão Customizada",
+    description:
+      "Impressão customizada em MDF, acrílico, tecido, UV e muito mais.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
 };
 
 export default function RootLayout({
