@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -16,23 +17,15 @@ const links = [
 
 function Logo() {
   return (
-    <Link href="#" className="flex items-center gap-3 no-underline">
-      <svg
-        className="w-[28px] h-[28px] flex-shrink-0"
-        viewBox="0 0 64 64"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-label="Forma Prima símbolo"
-      >
-        <rect x="23" y="7" width="18" height="10" rx="2" fill="#E06042" />
-        <rect x="20" y="9" width="3" height="6" rx="1" fill="#B83C1E" />
-        <rect x="41" y="9" width="3" height="6" rx="1" fill="#B83C1E" />
-        <polygon points="25,17 39,17 32,25" fill="#E06042" />
-        <line x1="32" y1="25" x2="32" y2="46" stroke="#E06042" strokeWidth="0.8" strokeLinecap="round" />
-        <circle cx="32" cy="46" r="1.5" fill="#E06042" />
-        <line x1="32" y1="46" x2="27" y2="43" stroke="#E06042" strokeWidth="0.6" strokeLinecap="round" opacity="0.55" />
-        <line x1="32" y1="46" x2="37" y2="43" stroke="#E06042" strokeWidth="0.6" strokeLinecap="round" opacity="0.55" />
-        <rect x="18" y="49" width="28" height="7" rx="1.5" fill="#F0ECE6" />
-      </svg>
+    <Link href="/" className="flex items-center gap-3 no-underline">
+      <Image
+        src="/logo_icon_transparente.png"
+        alt="Forma Prima"
+        width={32}
+        height={32}
+        className="w-[32px] h-[32px] flex-shrink-0 object-contain"
+        priority
+      />
       <div className="flex flex-col leading-none">
         <span className="text-white font-semibold uppercase text-[13px] tracking-[0.15em]">
           FORMA
@@ -97,10 +90,13 @@ export function Navbar() {
               href={link.href}
               className={cn(
                 buttonVariants({ variant: "ghost", size: "default" }),
-                "text-[13px] font-normal text-[#8A8276] hover:text-white hover:bg-white/[0.06] no-underline"
+                "group relative text-[13px] font-medium text-[#C8C2B6] hover:text-[#E8C99A] hover:bg-transparent no-underline transition-colors"
               )}
             >
-              {link.label}
+              <span className="relative">
+                {link.label}
+                <span className="absolute left-0 -bottom-0.5 h-px w-0 bg-[#E8C99A] transition-all duration-300 group-hover:w-full" />
+              </span>
             </Link>
           ))}
 
@@ -155,7 +151,7 @@ export function Navbar() {
                 onClick={() => setOpen(false)}
                 className={cn(
                   buttonVariants({ variant: "ghost" }),
-                  "justify-start text-[15px] text-[#8A8276] hover:text-white hover:bg-white/[0.06] no-underline"
+                  "justify-start text-[15px] font-medium text-[#D4CEC4] hover:text-[#E8C99A] hover:bg-white/[0.06] no-underline"
                 )}
               >
                 {link.label}
