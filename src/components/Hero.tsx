@@ -1,8 +1,8 @@
 "use client";
 
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { AnimatedButton } from "@/components/AnimatedButton";
-import { SmokeBackground } from "@/components/ui/spooky-smoke-animation";
 import AnimatedTextCycle from "@/components/ui/animated-text-cycle";
 
 interface MaterialCardProps {
@@ -122,6 +122,28 @@ const UvIcon = () => (
 );
 
 export function Hero() {
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const show = () => setVideoLoaded(true);
+
+    // If already ready (cached), show immediately
+    if (video.readyState >= 3) {
+      show();
+      return;
+    }
+
+    video.addEventListener("playing", show);
+    // Force play attempt
+    video.play().catch(() => {});
+
+    return () => video.removeEventListener("playing", show);
+  }, []);
+
   return (
     <section
       className="relative overflow-hidden"
@@ -130,18 +152,44 @@ export function Hero() {
         minHeight: "calc(100vh - 64px)",
       }}
     >
-      <div className="absolute inset-0 opacity-30">
-        <SmokeBackground smokeColor="#C94F2C" />
-      </div>
-      {/* Stronger base overlay for readability */}
+      {/* Fallback image — visible until video is ready */}
       <div
-        className="absolute inset-0 z-10 pointer-events-none"
+        className="absolute inset-0 z-0 transition-opacity duration-700"
         style={{
-          background:
-            "linear-gradient(to bottom, rgba(18,16,14,0.82), rgba(18,16,14,0.55) 45%, rgba(18,16,14,0.88))",
+          opacity: videoLoaded ? 0 : 1,
+          backgroundImage: "url(/background.png)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       />
-      {/* Left-side vignette to boost text contrast */}
+      {/* Video background */}
+      <video
+        ref={videoRef}
+        src="/background.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
+        className="absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-700"
+        style={{ opacity: videoLoaded ? 1 : 0 }}
+      />
+      {/* Dark overlay for text readability — stronger on mobile */}
+      <div
+        className="absolute inset-0 z-10 pointer-events-none lg:hidden"
+        style={{
+          background:
+            "linear-gradient(to bottom, rgba(18,16,14,0.88), rgba(18,16,14,0.65) 45%, rgba(18,16,14,0.92))",
+        }}
+      />
+      <div
+        className="absolute inset-0 z-10 pointer-events-none hidden lg:block"
+        style={{
+          background:
+            "linear-gradient(to bottom, rgba(18,16,14,0.78), rgba(18,16,14,0.50) 45%, rgba(18,16,14,0.85))",
+        }}
+      />
+      {/* Left-side vignette for desktop */}
       <div
         className="absolute inset-0 z-10 pointer-events-none hidden lg:block"
         style={{

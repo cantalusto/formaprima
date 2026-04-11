@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -27,20 +28,21 @@ const categories = [
 
 const projects = [
   // MDF / corte a laser
-  { title: "Quadrinho com Wi-Fi, Instagram e Pix", category: "MDF", color: "#3A3228", accent: "#E8C99A" },
-  { title: "Nome em MDF com relevo iluminado", category: "MDF", color: "#342E26", accent: "#C8A868" },
-  { title: "Caixa personalizada em MDF", category: "MDF", color: "#382E24", accent: "#D4B880" },
-  { title: "Tábua personalizada para presente", category: "MDF", color: "#34302C", accent: "#C09878" },
-  { title: "Porta copos gravados a laser", category: "MDF", color: "#302A22", accent: "#B89060" },
-  { title: "Chaveiros personalizados em MDF", category: "MDF", color: "#2E2820", accent: "#D0A868" },
-  { title: "Suporte para celular e notebook", category: "MDF", color: "#322C24", accent: "#C89868" },
-  { title: "Mandala decorativa vazada", category: "MDF", color: "#2C2620", accent: "#B08050" },
-  { title: "Letras grandes decorativas", category: "MDF", color: "#362E26", accent: "#D8B878" },
-  { title: "Plaquinha com nome do pet", category: "MDF", color: "#302820", accent: "#C0A070" },
+  { title: "Quadrinho com Wi-Fi, Instagram e Pix", category: "MDF", image: "/portfolio/wifimdf.jpg" },
+  { title: "Nome em MDF com relevo iluminado", category: "MDF", image: "/portfolio/Nome em MDF com relevo iluminado.jpg" },
+  { title: "Caixa personalizada em MDF", category: "MDF", image: "/portfolio/Caixa personalizada MDF.jpg" },
+  { title: "Tábua personalizada para presente", category: "MDF", image: "/portfolio/Tábua personalizada para presente MDF.jpg" },
+  { title: "Porta copos gravados a laser", category: "MDF", image: "/portfolio/Porta copos gravados a laser.jpg" },
+  { title: "Chaveiros personalizados em MDF", category: "MDF", image: "/portfolio/chaveiromdf.jpg" },
+  { title: "Suporte para celular", category: "MDF", image: "/portfolio/Suporte para Celular MDF.jpg" },
+  { title: "Suporte para notebook", category: "MDF", image: "/portfolio/Suporte para notebook MDF.jpg" },
+  { title: "Mandala decorativa vazada", category: "MDF", image: "/portfolio/Mandala decorativa vazada em MDF.jpg" },
+  { title: "Letras grandes decorativas", category: "MDF", image: "/portfolio/Letras grandes decorativas.jpeg" },
+  { title: "Plaquinha com nome do pet", category: "MDF", image: "/portfolio/placapetmdf.jpg" },
 
   // Acrílico
+  { title: "Chaveiros em acrílico", category: "Acrílico", image: "/portfolio/chaveiroacrilico.jpg" },
   { title: "Expositor de óculos para ótica", category: "Acrílico", color: "#2A3038", accent: "#7ABCD8" },
-  { title: "Painel de ótica em acrílico", category: "Acrílico", color: "#283038", accent: "#5A9AB8" },
   { title: "Troféu corporativo em acrílico", category: "Acrílico", color: "#2A2E34", accent: "#90C8E0" },
   { title: "Letras em acrílico para loja", category: "Acrílico", color: "#263038", accent: "#88C0D8" },
 
@@ -48,14 +50,13 @@ const projects = [
   { title: "Letreiro para salão de beleza", category: "Letreiros", color: "#2C2822", accent: "#E06042" },
   { title: "Letreiro iluminado para consultório", category: "Letreiros", color: "#302822", accent: "#D85030" },
   { title: "Painel ripado para recepção", category: "Letreiros", color: "#342C22", accent: "#B88040" },
-  { title: "Nome de família em MDF (Família Silva)", category: "Letreiros", color: "#322A22", accent: "#C8A060" },
+  { title: "Nome de família em MDF", category: "Letreiros", color: "#322A22", accent: "#C8A060" },
 
   // Placas
   { title: "Placa em ACM para fachada externa", category: "Placas", color: "#2A2E34", accent: "#90A8B8" },
   { title: "Placa ABC para formatura", category: "Placas", color: "#2C2A26", accent: "#D4B080" },
   { title: "Placas de promoção para loja", category: "Placas", color: "#302822", accent: "#E06042" },
   { title: "Mini placas com QR code", category: "Placas", color: "#2E2822", accent: "#C88050" },
-  { title: "Placa para porta de quarto de bebê", category: "Placas", color: "#342E28", accent: "#E8C0A0" },
 
   // Adesivos & Lonas
   { title: "Papel de parede personalizado", category: "Adesivos", color: "#2C2824", accent: "#B89878" },
@@ -114,29 +115,41 @@ export default function PortfolioPage() {
               <div
                 key={i}
                 className="rounded-2xl overflow-hidden cursor-pointer group relative"
-                style={{ background: project.color, minHeight: "240px" }}
+                style={{ background: project.image ? "#1E1A16" : project.color, minHeight: "280px" }}
               >
-                {/* Placeholder visual */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div
-                    className="w-16 h-16 rounded-xl opacity-10 group-hover:opacity-20 transition-opacity"
-                    style={{ background: project.accent }}
+                {/* Image or placeholder */}
+                {project.image ? (
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                </div>
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div
+                      className="w-16 h-16 rounded-xl opacity-10 group-hover:opacity-20 transition-opacity"
+                      style={{ background: project.accent }}
+                    />
+                  </div>
+                )}
+                {/* Gradient overlay for text readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 {/* Label */}
-                <div className="absolute top-4 left-5">
-                  <span className="text-[10px] font-medium tracking-[0.12em] uppercase text-white/40">
+                <div className="absolute top-4 left-5 z-10">
+                  <span className="text-[10px] font-medium tracking-[0.12em] uppercase text-white/60">
                     {project.category}
                   </span>
                 </div>
                 {/* Info */}
-                <div className="absolute bottom-0 left-0 right-0 p-5">
-                  <h3 className="text-sm font-medium text-white/80 group-hover:text-white transition-colors">
+                <div className="absolute bottom-0 left-0 right-0 p-5 z-10">
+                  <h3 className="text-sm font-medium text-white/90 group-hover:text-white transition-colors">
                     {project.title}
                   </h3>
                 </div>
                 {/* Arrow */}
-                <div className="absolute top-4 right-4 w-7 h-7 rounded-full bg-white/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="absolute top-4 right-4 w-7 h-7 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10">
                   <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round">
                     <path d="M2 10L10 2M10 2H4M10 2v6" />
                   </svg>
