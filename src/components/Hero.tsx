@@ -12,56 +12,47 @@ interface MaterialCardProps {
   index: number;
 }
 
-function MaterialCard({ name, subtitle, icon, index }: MaterialCardProps) {
+function MaterialListItem({ name, subtitle, icon, index }: MaterialCardProps) {
   return (
     <motion.a
       href="/materiais"
-      initial={{ scale: 0.96, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
-      transition={{ duration: 0.4, delay: 0.3 + index * 0.07 }}
-      whileHover={{ y: -4 }}
-      className="group relative rounded-[16px] flex flex-col gap-3 cursor-pointer no-underline overflow-hidden"
+      initial={{ x: 12, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.35, delay: 0.3 + index * 0.08 }}
+      className="group relative flex items-center gap-4 no-underline cursor-pointer"
       style={{
-        background:
-          "linear-gradient(155deg, rgba(46,40,36,0.95) 0%, rgba(30,26,22,0.95) 100%)",
-        border: "1px solid rgba(255,255,255,0.08)",
-        padding: "26px 22px",
-        transition: "border-color 200ms, box-shadow 200ms",
+        padding: "11px 20px",
+        borderBottom: "1px solid rgba(255,255,255,0.06)",
+        borderLeft: index === 0 ? "2px solid #C94F2C" : "2px solid rgba(255,255,255,0.08)",
+        background: index === 0 ? "rgba(201,79,44,0.06)" : "transparent",
+        transition: "border-color 250ms, background 250ms",
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = "rgba(201,79,44,0.5)";
-        e.currentTarget.style.boxShadow =
-          "0 8px 24px rgba(201,79,44,0.15)";
+        e.currentTarget.style.borderLeftColor = "#C94F2C";
+        e.currentTarget.style.background = "rgba(201,79,44,0.06)";
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
-        e.currentTarget.style.boxShadow = "none";
+        if (index !== 0) {
+          e.currentTarget.style.borderLeftColor = "rgba(255,255,255,0.08)";
+          e.currentTarget.style.background = "transparent";
+        }
       }}
     >
-      {/* Hover glow */}
-      <div
-        className="absolute -top-8 -right-8 w-24 h-24 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(201,79,44,0.25), transparent 70%)",
-        }}
-      />
-      <div className="text-terra scale-125 origin-left mb-1">{icon}</div>
-      <div
-        className="text-white"
-        style={{ fontSize: "16px", fontWeight: 600, letterSpacing: "-0.01em" }}
+      <div className="text-terra flex-shrink-0">{icon}</div>
+      <div className="flex flex-col">
+        <span className="text-white text-[15px] font-semibold tracking-[-0.01em] group-hover:text-white/95 transition-colors">
+          {name}
+        </span>
+        <span className="text-[12.5px] mt-0.5" style={{ color: "#B8B0A4" }}>
+          {subtitle}
+        </span>
+      </div>
+      <svg
+        className="ml-auto opacity-0 group-hover:opacity-60 transition-opacity flex-shrink-0"
+        width="14" height="14" viewBox="0 0 12 12" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round"
       >
-        {name}
-      </div>
-      <div style={{ color: "#B8B0A4", fontSize: "12.5px", fontWeight: 400 }}>
-        {subtitle}
-      </div>
-      {/* Arrow indicator */}
-      <div className="absolute top-4 right-4 w-6 h-6 rounded-full bg-white/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-        <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
-          <path d="M2 10L10 2M10 2H4M10 2v6" />
-        </svg>
-      </div>
+        <path d="M4.5 2.5L8.5 6L4.5 9.5" />
+      </svg>
     </motion.a>
   );
 }
@@ -80,7 +71,7 @@ const heroLeftVariants = {
 };
 
 const MdfIcon = () => (
-  <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+  <svg width="32" height="32" viewBox="0 0 36 36" fill="none">
     <rect x="4" y="20" width="28" height="5" rx="1" stroke="currentColor" strokeWidth="1.5" />
     <rect x="4" y="13" width="28" height="5" rx="1" stroke="currentColor" strokeWidth="1.5" />
     <rect x="4" y="6" width="28" height="5" rx="1" stroke="currentColor" strokeWidth="1.5" />
@@ -91,7 +82,7 @@ const MdfIcon = () => (
 );
 
 const AcrilicoIcon = () => (
-  <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+  <svg width="32" height="32" viewBox="0 0 36 36" fill="none">
     <rect x="5" y="4" width="26" height="28" rx="2" stroke="currentColor" strokeWidth="1.5" />
     <line x1="5" y1="10" x2="31" y2="10" stroke="currentColor" strokeWidth="1" opacity="0.3" />
     <line x1="9" y1="4" x2="9" y2="32" stroke="currentColor" strokeWidth="1" opacity="0.2" />
@@ -99,7 +90,7 @@ const AcrilicoIcon = () => (
 );
 
 const TecidoIcon = () => (
-  <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+  <svg width="32" height="32" viewBox="0 0 36 36" fill="none">
     <rect x="3" y="3" width="30" height="30" rx="2" stroke="currentColor" strokeWidth="1.5" />
     <line x1="3" y1="11" x2="33" y2="11" stroke="currentColor" strokeWidth="1" opacity="0.5" />
     <line x1="3" y1="19" x2="33" y2="19" stroke="currentColor" strokeWidth="1" opacity="0.5" />
@@ -111,7 +102,7 @@ const TecidoIcon = () => (
 );
 
 const UvIcon = () => (
-  <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+  <svg width="32" height="32" viewBox="0 0 36 36" fill="none">
     <rect x="6" y="4" width="24" height="10" rx="2" stroke="currentColor" strokeWidth="1.5" />
     <line x1="18" y1="14" x2="18" y2="22" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     <line x1="11" y1="14" x2="9" y2="22" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -198,7 +189,7 @@ export function Hero() {
         }}
       />
       <div
-        className="relative z-20 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center px-6 py-16 md:px-12 lg:px-12"
+        className="relative z-20 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-end px-6 pb-16 pt-24 md:px-12 lg:px-12 lg:items-center"
         style={{ minHeight: "calc(100vh - 64px)" }}
       >
       {/* Left side */}
@@ -276,29 +267,32 @@ export function Hero() {
         </motion.div>
       </div>
 
-      {/* Right side - 2x2 Cards */}
-      <div className="grid grid-cols-2" style={{ gap: "12px" }}>
-        <MaterialCard
+      {/* Right side - Vertical list with left border accent */}
+      <div
+        className="flex flex-col rounded-2xl overflow-hidden [&>*:last-child]:border-b-0 lg:ml-auto lg:min-w-[300px]"
+        style={{ background: "rgba(28,26,23,0.45)", backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)", border: "1px solid rgba(255,255,255,0.08)" }}
+      >
+        <MaterialListItem
           name="MDF"
-          subtitle="Corte e gravação"
+          subtitle="Corte e gravação a laser"
           icon={<MdfIcon />}
           index={0}
         />
-        <MaterialCard
+        <MaterialListItem
           name="Acrílico"
           subtitle="Transparente ou colorido"
           icon={<AcrilicoIcon />}
           index={1}
         />
-        <MaterialCard
+        <MaterialListItem
           name="ACM & Lonas"
           subtitle="Fachadas e placas"
           icon={<TecidoIcon />}
           index={2}
         />
-        <MaterialCard
+        <MaterialListItem
           name="Sublimação"
-          subtitle="Canecas, azulejos"
+          subtitle="Canecas, azulejos e almofadas"
           icon={<UvIcon />}
           index={3}
         />
