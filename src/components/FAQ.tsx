@@ -54,6 +54,8 @@ function FAQItem({
     >
       <button
         onClick={onToggle}
+        aria-expanded={isOpen}
+        aria-label={isOpen ? `Fechar resposta: ${question}` : `Abrir resposta: ${question}`}
         className="w-full flex items-center justify-between py-5 text-left cursor-pointer bg-transparent border-none"
       >
         <span className="text-[15px] font-medium text-carvao">{question}</span>
@@ -65,6 +67,7 @@ function FAQItem({
           }}
         >
           <svg
+            aria-hidden="true"
             width="14"
             height="14"
             viewBox="0 0 14 14"
@@ -99,11 +102,25 @@ function FAQItem({
   );
 }
 
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.question,
+    acceptedAnswer: { "@type": "Answer", text: f.answer },
+  })),
+};
+
 export function FAQ() {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
     <section className="bg-creme py-[72px] px-6 md:px-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <div className="max-w-[640px] mx-auto">
         <motion.div
           initial={{ y: 24, opacity: 0 }}

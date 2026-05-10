@@ -5,7 +5,8 @@
       "Bash(npm install:*)",
       "Bash(node -e \"console.log\\('cwd:', process.cwd\\(\\)\\)\")",
       "Bash(node -e \"console.log\\(require.resolve\\('tailwindcss'\\)\\)\")",
-      "Bash(npx ffprobe:*)"
+      "Bash(npx ffprobe:*)",
+      "Bash(npx tsc *)"
     ]
   }
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { AnimatedButton } from "@/components/AnimatedButton";
 import AnimatedTextCycle from "@/components/ui/animated-text-cycle";
@@ -10,32 +11,27 @@ interface MaterialCardProps {
   subtitle: string;
   icon: React.ReactNode;
   index: number;
+  active: boolean;
+  onActivate: () => void;
 }
 
-function MaterialListItem({ name, subtitle, icon, index }: MaterialCardProps) {
+function MaterialListItem({ name, subtitle, icon, index, active, onActivate }: MaterialCardProps) {
   return (
     <motion.a
       href="/materiais"
+      aria-label={`Ver materiais: ${name} — ${subtitle}`}
       initial={{ x: 12, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.35, delay: 0.3 + index * 0.08 }}
+      onMouseEnter={onActivate}
+      onFocus={onActivate}
       className="group relative flex items-center gap-4 no-underline cursor-pointer"
       style={{
         padding: "11px 20px",
         borderBottom: "1px solid rgba(255,255,255,0.06)",
-        borderLeft: index === 0 ? "2px solid #C94F2C" : "2px solid rgba(255,255,255,0.08)",
-        background: index === 0 ? "rgba(201,79,44,0.06)" : "transparent",
+        borderLeft: active ? "2px solid #C94F2C" : "2px solid rgba(255,255,255,0.08)",
+        background: active ? "rgba(201,79,44,0.06)" : "transparent",
         transition: "border-color 250ms, background 250ms",
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.borderLeftColor = "#C94F2C";
-        e.currentTarget.style.background = "rgba(201,79,44,0.06)";
-      }}
-      onMouseLeave={(e) => {
-        if (index !== 0) {
-          e.currentTarget.style.borderLeftColor = "rgba(255,255,255,0.08)";
-          e.currentTarget.style.background = "transparent";
-        }
       }}
     >
       <div className="text-terra flex-shrink-0">{icon}</div>
@@ -48,6 +44,7 @@ function MaterialListItem({ name, subtitle, icon, index }: MaterialCardProps) {
         </span>
       </div>
       <svg
+        aria-hidden="true"
         className="ml-auto opacity-0 group-hover:opacity-60 transition-opacity flex-shrink-0"
         width="14" height="14" viewBox="0 0 12 12" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round"
       >
@@ -114,6 +111,7 @@ const UvIcon = () => (
 
 export function Hero() {
   const [videoLoaded, setVideoLoaded] = useState(false);
+  const [activeMaterial, setActiveMaterial] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -161,7 +159,9 @@ export function Hero() {
         loop
         muted
         playsInline
-        preload="auto"
+        preload="metadata"
+        poster="/background.png"
+        aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-700"
         style={{ opacity: videoLoaded ? 1 : 0 }}
       />
@@ -251,12 +251,14 @@ export function Hero() {
           className="flex flex-row flex-wrap items-center"
           style={{ marginTop: "36px", gap: "24px" }}
         >
-          <AnimatedButton
-            className="h-auto text-white rounded-full px-8 py-4 text-[15px] font-semibold shadow-lg shadow-terra/30 hover:shadow-terra/50 transition-shadow"
-            style={{ background: "#C94F2C" }}
-          >
-            Pedir orçamento →
-          </AnimatedButton>
+          <Link href="/orcamento" className="no-underline">
+            <AnimatedButton
+              className="h-auto text-white rounded-full px-8 py-4 text-[15px] font-semibold shadow-lg shadow-terra/30 hover:shadow-terra/50 transition-shadow"
+              style={{ background: "#C94F2C" }}
+            >
+              Pedir orçamento →
+            </AnimatedButton>
+          </Link>
           <a
             href="/portfolio"
             className="text-[14px] font-medium text-white/80 hover:text-terra no-underline inline-flex items-center gap-1.5 group transition-colors"
@@ -272,30 +274,22 @@ export function Hero() {
         className="flex flex-col rounded-2xl overflow-hidden [&>*:last-child]:border-b-0 lg:ml-auto lg:min-w-[300px]"
         style={{ background: "rgba(28,26,23,0.45)", backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)", border: "1px solid rgba(255,255,255,0.08)" }}
       >
-        <MaterialListItem
-          name="MDF"
-          subtitle="Corte e gravação a laser"
-          icon={<MdfIcon />}
-          index={0}
-        />
-        <MaterialListItem
-          name="Acrílico"
-          subtitle="Transparente ou colorido"
-          icon={<AcrilicoIcon />}
-          index={1}
-        />
-        <MaterialListItem
-          name="ACM & Lonas"
-          subtitle="Fachadas e placas"
-          icon={<TecidoIcon />}
-          index={2}
-        />
-        <MaterialListItem
-          name="Sublimação"
-          subtitle="Canecas, azulejos e almofadas"
-          icon={<UvIcon />}
-          index={3}
-        />
+        {[
+          { name: "MDF", subtitle: "Corte e gravação a laser", icon: <MdfIcon /> },
+          { name: "Acrílico", subtitle: "Transparente ou colorido", icon: <AcrilicoIcon /> },
+          { name: "ACM & Lonas", subtitle: "Fachadas e placas", icon: <TecidoIcon /> },
+          { name: "Sublimação", subtitle: "Canecas, azulejos e almofadas", icon: <UvIcon /> },
+        ].map((item, i) => (
+          <MaterialListItem
+            key={item.name}
+            name={item.name}
+            subtitle={item.subtitle}
+            icon={item.icon}
+            index={i}
+            active={activeMaterial === i}
+            onActivate={() => setActiveMaterial(i)}
+          />
+        ))}
       </div>
       </div>
     </section>

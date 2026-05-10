@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { DM_Sans, DM_Mono } from "next/font/google";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import "./globals.css";
@@ -45,12 +45,24 @@ export const metadata: Metadata = {
     title: "Forma Prima — Gráfica · Impressão Customizada",
     description:
       "Impressão customizada em MDF, acrílico, tecido, UV e muito mais. Orçamento em até 2 horas.",
+    images: [
+      {
+        url: "/background.png",
+        width: 1200,
+        height: 630,
+        alt: "Forma Prima — Impressão personalizada",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Forma Prima — Gráfica · Impressão Customizada",
     description:
       "Impressão customizada em MDF, acrílico, tecido, UV e muito mais.",
+    images: ["/background.png"],
+  },
+  alternates: {
+    canonical: "/",
   },
   robots: {
     index: true,
@@ -60,6 +72,38 @@ export const metadata: Metadata = {
       follow: true,
     },
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#F5F1EA" },
+    { media: "(prefers-color-scheme: dark)", color: "#1C1A17" },
+  ],
+  width: "device-width",
+  initialScale: 1,
+};
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": `${siteUrl}/#organization`,
+  name: "Forma Prima",
+  url: siteUrl,
+  logo: `${siteUrl}/logo_icon_transparente.png`,
+  image: `${siteUrl}/background.png`,
+  description:
+    "Impressão customizada em MDF, acrílico, ACM, sublimação e comunicação visual. Corte a laser, letreiros, placas, caixas e brindes.",
+  telephone: "+55-81-99999-9999",
+  email: "contato@formaprima.com.br",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Recife",
+    addressRegion: "PE",
+    addressCountry: "BR",
+  },
+  areaServed: { "@type": "Country", name: "Brasil" },
+  priceRange: "$$",
+  sameAs: ["https://www.instagram.com/formaprima"],
 };
 
 export default function RootLayout({
@@ -73,6 +117,10 @@ export default function RootLayout({
       className={`${dmSans.variable} ${dmMono.variable} antialiased`}
     >
       <body className="bg-carvao text-branco font-sans overflow-x-hidden">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
         <SmoothScroll />
         {children}
       </body>

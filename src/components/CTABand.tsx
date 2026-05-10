@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { AnimatedButton } from "@/components/AnimatedButton";
 
@@ -21,9 +22,11 @@ export function CTABand() {
             Orçamento em até 2 horas. Sem compromisso.
           </p>
         </div>
-        <AnimatedButton className="bg-white hover:opacity-90 text-terra text-[12.5px] font-medium tracking-[0.05em] px-7 py-3.5 rounded-full h-auto whitespace-nowrap flex-shrink-0">
-          Pedir orçamento grátis
-        </AnimatedButton>
+        <Link href="/orcamento" className="no-underline flex-shrink-0">
+          <AnimatedButton className="bg-white hover:opacity-90 text-terra text-[12.5px] font-medium tracking-[0.05em] px-7 py-3.5 rounded-full h-auto whitespace-nowrap">
+            Pedir orçamento grátis
+          </AnimatedButton>
+        </Link>
       </motion.div>
     </div>
   );

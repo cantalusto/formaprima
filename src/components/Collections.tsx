@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const itemVariants = {
@@ -20,7 +21,8 @@ interface CollectionCardProps {
   title: string;
   subtitle: string;
   bgColor: string;
-  icon: React.ReactNode;
+  image?: string;
+  imageAlt?: string;
   index: number;
   span?: string;
 }
@@ -30,7 +32,8 @@ function CollectionCard({
   title,
   subtitle,
   bgColor,
-  icon,
+  image,
+  imageAlt,
   index,
   span,
 }: CollectionCardProps) {
@@ -44,22 +47,38 @@ function CollectionCard({
       className={`rounded-2xl overflow-hidden cursor-pointer group relative ${span || ""}`}
       style={{ background: bgColor, minHeight: "260px" }}
     >
-      <div className="absolute top-4 left-5">
-        <span className="text-[10px] font-medium tracking-[0.12em] uppercase text-white/50">
+      {image && (
+        <>
+          <Image
+            src={image}
+            alt={imageAlt ?? title}
+            fill
+            sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(to top, rgba(15,13,10,0.85) 0%, rgba(15,13,10,0.55) 45%, rgba(15,13,10,0.35) 100%)",
+            }}
+          />
+        </>
+      )}
+      <div className="absolute top-4 left-5 z-10">
+        <span className="text-[10px] font-medium tracking-[0.12em] uppercase text-white/80">
           {label}
         </span>
       </div>
-      <div className="flex flex-col justify-end h-full p-5 pt-12">
-        <div className="mb-4 opacity-60 group-hover:opacity-80 transition-opacity">
-          {icon}
-        </div>
-        <h3 className="text-xl font-semibold text-white leading-tight">
+      <div className="relative z-10 flex flex-col justify-end h-full p-5 pt-12">
+        <h3 className="text-xl font-semibold text-white leading-tight drop-shadow">
           {title}
         </h3>
-        <p className="text-xs text-white/50 mt-1.5">{subtitle}</p>
+        <p className="text-xs text-white/80 mt-1.5 drop-shadow">{subtitle}</p>
       </div>
-      <div className="absolute top-4 right-4 w-7 h-7 rounded-full bg-white/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+      <div className="absolute top-4 right-4 w-7 h-7 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10">
         <svg
+          aria-hidden="true"
           width="12"
           height="12"
           viewBox="0 0 12 12"
@@ -91,204 +110,55 @@ export function Collections() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
-        {/* Card 1 - Quadrinhos Wi-Fi / Instagram / Pix (large) */}
         <CollectionCard
           label="Mais pedido"
           title="Quadrinhos Wi-Fi, Insta & Pix"
           subtitle="MDF · Corte e gravação a laser"
           bgColor="#3A3228"
+          image="/portfolio/wifimdf.jpg"
+          imageAlt="Quadrinho de MDF com QR Code de Wi-Fi"
           span="md:row-span-2"
           index={0}
-          icon={
-            <svg width="64" height="48" viewBox="0 0 64 48" fill="none">
-              <rect
-                x="4"
-                y="4"
-                width="56"
-                height="40"
-                rx="4"
-                stroke="white"
-                strokeWidth="1.2"
-                opacity="0.6"
-              />
-              <rect
-                x="12"
-                y="12"
-                width="40"
-                height="24"
-                rx="2"
-                fill="white"
-                opacity="0.08"
-              />
-              <text
-                x="32"
-                y="28"
-                textAnchor="middle"
-                fontFamily="inherit"
-                fontSize="7"
-                fontWeight="500"
-                fill="white"
-                opacity="0.5"
-                letterSpacing="2"
-              >
-                FORMA PRIMA WI-FI
-              </text>
-            </svg>
-          }
         />
 
-        {/* Card 2 - Letreiros e fachadas */}
         <CollectionCard
           label="Empresas"
           title="Letreiros & fachadas"
           subtitle="Salão, loja, consultório · MDF e ACM"
           bgColor="#2A3038"
+          image="/portfolio/Nome em MDF com relevo iluminado.jpg"
+          imageAlt="Letreiro de MDF com relevo iluminado"
           index={1}
-          icon={
-            <svg width="48" height="36" viewBox="0 0 48 36" fill="none">
-              <rect
-                x="3"
-                y="3"
-                width="42"
-                height="30"
-                rx="3"
-                stroke="white"
-                strokeWidth="1.2"
-                opacity="0.5"
-              />
-              <line
-                x1="3"
-                y1="12"
-                x2="45"
-                y2="12"
-                stroke="white"
-                strokeWidth="0.8"
-                opacity="0.2"
-              />
-              <line
-                x1="15"
-                y1="3"
-                x2="15"
-                y2="33"
-                stroke="white"
-                strokeWidth="0.8"
-                opacity="0.15"
-              />
-            </svg>
-          }
         />
 
-        {/* Card 3 - Caixas e presentes */}
         <CollectionCard
           label="Presentes"
           title="Caixas & tábuas"
           subtitle="MDF gravado · Lembranças e presentes"
           bgColor="#38302A"
+          image="/portfolio/Caixa personalizada MDF.jpg"
+          imageAlt="Caixa personalizada gravada em MDF"
           index={2}
-          icon={
-            <svg width="48" height="36" viewBox="0 0 48 36" fill="none">
-              <rect
-                x="8"
-                y="2"
-                width="32"
-                height="12"
-                rx="2"
-                stroke="white"
-                strokeWidth="1.2"
-                opacity="0.5"
-              />
-              <line
-                x1="24"
-                y1="14"
-                x2="24"
-                y2="24"
-                stroke="white"
-                strokeWidth="1.2"
-                strokeLinecap="round"
-                opacity="0.5"
-              />
-              <line
-                x1="16"
-                y1="14"
-                x2="13"
-                y2="24"
-                stroke="white"
-                strokeWidth="1.2"
-                strokeLinecap="round"
-                opacity="0.5"
-              />
-              <line
-                x1="32"
-                y1="14"
-                x2="35"
-                y2="24"
-                stroke="white"
-                strokeWidth="1.2"
-                strokeLinecap="round"
-                opacity="0.5"
-              />
-            </svg>
-          }
         />
 
-        {/* Card 4 - Acrílico para óticas e troféus */}
         <CollectionCard
           label="Acrílico"
           title="Expositores & troféus"
           subtitle="Óticas, lojas e homenagens"
           bgColor="#2E2A24"
+          image="/portfolio/Letras grandes decorativas.jpeg"
+          imageAlt="Letras decorativas em acrílico"
           index={3}
-          icon={
-            <svg width="48" height="36" viewBox="0 0 48 36" fill="none">
-              <rect
-                x="3"
-                y="3"
-                width="42"
-                height="30"
-                rx="2"
-                stroke="white"
-                strokeWidth="1.2"
-                opacity="0.5"
-              />
-              <line x1="3" y1="12" x2="45" y2="12" stroke="white" strokeWidth="0.8" opacity="0.3" />
-              <line x1="3" y1="21" x2="45" y2="21" stroke="white" strokeWidth="0.8" opacity="0.3" />
-              <line x1="17" y1="3" x2="17" y2="33" stroke="white" strokeWidth="0.8" opacity="0.3" />
-              <line x1="31" y1="3" x2="31" y2="33" stroke="white" strokeWidth="0.8" opacity="0.3" />
-            </svg>
-          }
         />
 
-        {/* Card 5 - Sublimação */}
         <CollectionCard
           label="Sublimação"
           title="Canecas, azulejos & almofadas"
           subtitle="Foto personalizada em alta definição"
           bgColor="#34302C"
+          image="/portfolio/Porta copos gravados a laser.jpg"
+          imageAlt="Porta-copos gravados a laser"
           index={4}
-          icon={
-            <svg width="32" height="48" viewBox="0 0 32 48" fill="none">
-              <rect
-                x="4"
-                y="4"
-                width="24"
-                height="40"
-                rx="4"
-                stroke="white"
-                strokeWidth="1.2"
-                opacity="0.5"
-              />
-              <line x1="4" y1="12" x2="28" y2="12" stroke="white" strokeWidth="0.8" opacity="0.3" />
-              <rect
-                x="8"
-                y="16"
-                width="16"
-                height="8"
-                rx="1"
-                fill="white"
-                opacity="0.06"
-              />
-            </svg>
-          }
         />
       </div>
 

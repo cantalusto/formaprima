@@ -9,10 +9,12 @@ export const metadata: Metadata = {
   title: "Portfólio",
   description:
     "Veja projetos que já entregamos: placas, displays, brindes corporativos, letreiros, ecobags e muito mais.",
+  alternates: { canonical: "/portfolio" },
   openGraph: {
     title: "Portfólio · Forma Prima",
     description:
       "Projetos personalizados em MDF, acrílico, tecido e UV realizados para nossos clientes.",
+    url: "/portfolio",
   },
 };
 

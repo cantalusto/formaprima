@@ -8,10 +8,12 @@ export const metadata: Metadata = {
   title: "Materiais",
   description:
     "Conheça nossos materiais: MDF, acrílico, tecido e impressão UV. Corte a laser, sublimação e gravação de alta precisão.",
+  alternates: { canonical: "/materiais" },
   openGraph: {
     title: "Materiais · Forma Prima",
     description:
       "MDF, acrílico, tecido e impressão UV. O material certo para cada projeto.",
+    url: "/materiais",
   },
 };
 
