@@ -6,7 +6,16 @@
       "Bash(node -e \"console.log\\('cwd:', process.cwd\\(\\)\\)\")",
       "Bash(node -e \"console.log\\(require.resolve\\('tailwindcss'\\)\\)\")",
       "Bash(npx ffprobe:*)",
-      "Bash(npx tsc *)"
+      "Bash(npx tsc *)",
+      "Read(//c/Users/Lucas/Documents/developer/**)",
+      "Bash(npx --yes create-next-app@latest formaprima-shop --yes)",
+      "Bash(cp -r /c/Users/Lucas/Documents/developer/formaprima/public/portfolio /c/Users/Lucas/Documents/developer/formaprima-shop/public/)",
+      "Bash(cp /c/Users/Lucas/Documents/developer/formaprima/public/logo_icon_transparente.png /c/Users/Lucas/Documents/developer/formaprima-shop/public/)",
+      "Bash(npm view *)",
+      "Bash(npm run *)",
+      "WebSearch",
+      "WebFetch(domain:www.pexels.com)",
+      "mcp__Claude_Preview__preview_start"
     ]
   }
 }

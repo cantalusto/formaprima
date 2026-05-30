@@ -4,6 +4,7 @@ import { DividerBand } from "@/components/DividerBand";
 
 import { HowItWorks } from "@/components/HowItWorks";
 import { Collections } from "@/components/Collections";
+import { Campanha } from "@/components/Campanha";
 import { CTABand } from "@/components/CTABand";
 import { FAQ } from "@/components/FAQ";
 import { Clients } from "@/components/Clients";
@@ -20,6 +21,7 @@ export default function Home() {
       <DividerBand />
 
       <HowItWorks />
+      <Campanha />
       <Collections />
       <CTABand />
       <FAQ />

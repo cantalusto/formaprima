@@ -10,6 +10,7 @@ import { useScroll } from "@/components/ui/use-scroll";
 
 const links = [
   { href: "/materiais", label: "Materiais" },
+  { href: "/#campanha", label: "Campanha" },
   { href: "/portfolio", label: "Portfólio" },
   { href: "/orcamento", label: "Orçamento" },
   { href: "/contato", label: "Contato" },
