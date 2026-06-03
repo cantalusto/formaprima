@@ -57,14 +57,7 @@ export const metadata: Metadata = {
       "Forma Prima — Campanha Política, Marketing Digital & Comunicação Visual",
     description:
       "Material de campanha política e marketing digital: santinhos, bandeiras, adesivos, camisas e tráfego pago. Sua campanha nas ruas e na internet. Orçamento em até 2 horas.",
-    images: [
-      {
-        url: "/background.png",
-        width: 1200,
-        height: 630,
-        alt: "Forma Prima — Campanha política e comunicação visual",
-      },
-    ],
+    // og:image gerado automaticamente por src/app/opengraph-image.tsx
   },
   twitter: {
     card: "summary_large_image",
@@ -72,7 +65,7 @@ export const metadata: Metadata = {
       "Forma Prima — Campanha Política, Marketing Digital & Comunicação Visual",
     description:
       "Material de campanha política e marketing digital: santinhos, bandeiras, adesivos, camisas e tráfego pago. Sua campanha nas ruas e na internet.",
-    images: ["/background.png"],
+    // imagem reutiliza o opengraph-image gerado
   },
   alternates: {
     canonical: "/",
