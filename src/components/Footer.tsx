@@ -46,10 +46,10 @@ const socialLinks = [
 ];
 
 const navLinks = [
-  { href: "#materiais", label: "Nosso Estúdio" },
-  { href: "#produtos", label: "Serviços" },
-  { href: "#como-funciona", label: "Suporte" },
-  { href: "#", label: "Contato" },
+  { href: "/#campanha", label: "Campanha Política" },
+  { href: "/#marketing", label: "Marketing Digital" },
+  { href: "/materiais", label: "Materiais" },
+  { href: "/orcamento", label: "Orçamento" },
 ];
 
 export function Footer() {

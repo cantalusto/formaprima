@@ -13,13 +13,14 @@ interface MaterialCardProps {
   index: number;
   active: boolean;
   onActivate: () => void;
+  href?: string;
 }
 
-function MaterialListItem({ name, subtitle, icon, index, active, onActivate }: MaterialCardProps) {
+function MaterialListItem({ name, subtitle, icon, index, active, onActivate, href = "/materiais" }: MaterialCardProps) {
   return (
     <motion.a
-      href="/materiais"
-      aria-label={`Ver materiais: ${name} — ${subtitle}`}
+      href={href}
+      aria-label={`Ver ${name} — ${subtitle}`}
       initial={{ x: 12, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.35, delay: 0.3 + index * 0.08 }}
@@ -109,6 +110,15 @@ const UvIcon = () => (
   </svg>
 );
 
+const CampanhaIcon = () => (
+  <svg width="32" height="32" viewBox="0 0 36 36" fill="none">
+    <path d="M6 14l18-6v14L6 22v-8z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+    <path d="M24 10l5-2v12l-5-2" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+    <line x1="9" y1="22" x2="9" y2="29" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    <line x1="13" y1="23" x2="13" y2="30" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+  </svg>
+);
+
 export function Hero() {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [activeMaterial, setActiveMaterial] = useState(0);
@@ -194,6 +204,23 @@ export function Hero() {
       >
       {/* Left side */}
       <div className="flex flex-col">
+        <motion.a
+          href="/#campanha"
+          initial={{ y: 16, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="group inline-flex items-center gap-2 self-start rounded-full px-3.5 py-1.5 mb-5 no-underline"
+          style={{
+            background: "rgba(201,79,44,0.12)",
+            border: "1px solid rgba(201,79,44,0.32)",
+          }}
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-terra" />
+          <span className="text-[12px] font-semibold tracking-[0.03em] text-terra">
+            Eleições 2026 · Material de campanha + tráfego pago
+          </span>
+          <span className="text-terra/70 transition-transform group-hover:translate-x-0.5">→</span>
+        </motion.a>
         <motion.h1
           custom={0}
           initial="hidden"
@@ -239,8 +266,10 @@ export function Hero() {
             maxWidth: "420px",
           }}
         >
-          Corte a laser, letreiros, placas, caixas, sublimação e
-          comunicação visual. Para sua loja, seu evento e quem você ama.
+          Corte a laser, letreiros, placas, caixas, sublimação e comunicação
+          visual. E para candidatos: material de campanha completo —
+          santinhos, bandeiras, adesivos, camisas — junto com marketing
+          digital e tráfego pago para conquistar votos dentro e fora das ruas.
         </motion.p>
 
         <motion.div
@@ -275,6 +304,7 @@ export function Hero() {
         style={{ background: "rgba(28,26,23,0.45)", backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)", border: "1px solid rgba(255,255,255,0.08)" }}
       >
         {[
+          { name: "Campanha Política", subtitle: "Material + marketing digital", icon: <CampanhaIcon />, href: "/#campanha" },
           { name: "MDF", subtitle: "Corte e gravação a laser", icon: <MdfIcon /> },
           { name: "Acrílico", subtitle: "Transparente ou colorido", icon: <AcrilicoIcon /> },
           { name: "ACM & Lonas", subtitle: "Fachadas e placas", icon: <TecidoIcon /> },
@@ -288,6 +318,7 @@ export function Hero() {
             index={i}
             active={activeMaterial === i}
             onActivate={() => setActiveMaterial(i)}
+            href={item.href}
           />
         ))}
       </div>

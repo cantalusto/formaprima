@@ -29,6 +29,16 @@ const faqs = [
     answer:
       "Fazemos tanto unidades avulsas (um presente, um nome de bebê, uma placa) quanto lotes grandes para empresas, eventos e lembrancinhas. Há desconto progressivo por volume.",
   },
+  {
+    question: "Vocês fazem material para campanha política?",
+    answer:
+      "Sim! Produzimos a linha completa de campanha: santinhos, bottons, bandeiras, camisas, mochilas pirulito, adesivos perfurados para carro, praguinhas e placas. Atendemos pequenas e grandes quantidades, com agilidade nos prazos apertados de campanha. É só nos enviar o número, o nome e a arte — ou pedir que a gente crie tudo pra você.",
+  },
+  {
+    question: "Vocês cuidam do marketing digital e tráfego pago da campanha?",
+    answer:
+      "Cuidamos. Além do material impresso, oferecemos gestão de redes sociais, criação de criativos (artes, vídeos e cards), tráfego pago no Instagram, Facebook e Google com segmentação por bairro e perfil de eleitor, e a landing page oficial do candidato. É a campanha completa: nas ruas e na internet, falando a mesma língua.",
+  },
 ];
 
 function FAQItem({
