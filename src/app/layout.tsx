@@ -20,17 +20,28 @@ const siteUrl = "https://formaprima.com.br";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Forma Prima — Gráfica · Impressão Customizada",
+    default:
+      "Forma Prima — Campanha Política, Marketing Digital & Comunicação Visual",
     template: "%s · Forma Prima",
   },
   description:
-    "Impressão customizada em MDF, acrílico, tecido, UV e muito mais. Personalizamos para empresas, eventos e presentear quem você ama.",
+    "Material de campanha política e marketing digital em Recife: santinhos, bandeiras, adesivos, camisas, praguinhas e tráfego pago. Também MDF, acrílico, ACM, sublimação e comunicação visual.",
   keywords: [
+    "material de campanha política",
+    "santinhos personalizados",
+    "bandeiras de campanha",
+    "adesivos de campanha",
+    "camisas de campanha",
+    "praguinhas",
+    "marketing político",
+    "tráfego pago para campanha",
+    "gestão de redes sociais",
+    "marketing digital eleitoral",
     "impressão personalizada",
     "gráfica Recife",
     "MDF personalizado",
     "corte a laser",
-    "impressão UV",
+    "comunicação visual",
     "sublimação",
     "acrílico personalizado",
     "brindes corporativos",
@@ -42,23 +53,25 @@ export const metadata: Metadata = {
     locale: "pt_BR",
     url: siteUrl,
     siteName: "Forma Prima",
-    title: "Forma Prima — Gráfica · Impressão Customizada",
+    title:
+      "Forma Prima — Campanha Política, Marketing Digital & Comunicação Visual",
     description:
-      "Impressão customizada em MDF, acrílico, tecido, UV e muito mais. Orçamento em até 2 horas.",
+      "Material de campanha política e marketing digital: santinhos, bandeiras, adesivos, camisas e tráfego pago. Sua campanha nas ruas e na internet. Orçamento em até 2 horas.",
     images: [
       {
         url: "/background.png",
         width: 1200,
         height: 630,
-        alt: "Forma Prima — Impressão personalizada",
+        alt: "Forma Prima — Campanha política e comunicação visual",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Forma Prima — Gráfica · Impressão Customizada",
+    title:
+      "Forma Prima — Campanha Política, Marketing Digital & Comunicação Visual",
     description:
-      "Impressão customizada em MDF, acrílico, tecido, UV e muito mais.",
+      "Material de campanha política e marketing digital: santinhos, bandeiras, adesivos, camisas e tráfego pago. Sua campanha nas ruas e na internet.",
     images: ["/background.png"],
   },
   alternates: {
@@ -85,16 +98,16 @@ export const viewport: Viewport = {
 
 const organizationJsonLd = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  "@type": ["LocalBusiness", "ProfessionalService"],
   "@id": `${siteUrl}/#organization`,
   name: "Forma Prima",
   url: siteUrl,
   logo: `${siteUrl}/logo_icon_transparente.png`,
   image: `${siteUrl}/background.png`,
   description:
-    "Impressão customizada em MDF, acrílico, ACM, sublimação e comunicação visual. Corte a laser, letreiros, placas, caixas e brindes.",
-  telephone: "+55-81-99999-9999",
-  email: "contato@formaprima.com.br",
+    "Material de campanha política e marketing digital: santinhos, bandeiras, adesivos, camisas, praguinhas, tráfego pago e gestão de redes sociais. Também impressão customizada em MDF, acrílico, ACM, sublimação e comunicação visual.",
+  telephone: "+55-81-98734-2853",
+  email: "contatoformaprima@gmail.com",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Recife",
@@ -103,7 +116,57 @@ const organizationJsonLd = {
   },
   areaServed: { "@type": "Country", name: "Brasil" },
   priceRange: "$$",
-  sameAs: ["https://www.instagram.com/formaprima"],
+  sameAs: ["https://www.instagram.com/formaprimaa"],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Serviços Forma Prima",
+    itemListElement: [
+      {
+        "@type": "OfferCatalog",
+        name: "Material de Campanha Política",
+        itemListElement: [
+          "Santinhos",
+          "Bottons",
+          "Bandeiras",
+          "Camisas",
+          "Mochila Pirulito",
+          "Adesivo de carro perfurado",
+          "Praguinhas",
+          "Placas",
+        ].map((s) => ({
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", name: s },
+        })),
+      },
+      {
+        "@type": "OfferCatalog",
+        name: "Marketing Digital de Campanha",
+        itemListElement: [
+          "Tráfego pago (Meta e Google Ads)",
+          "Gestão de redes sociais",
+          "Criativos e design",
+          "Landing page e site do candidato",
+        ].map((s) => ({
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", name: s },
+        })),
+      },
+      {
+        "@type": "OfferCatalog",
+        name: "Comunicação Visual & Impressão",
+        itemListElement: [
+          "Corte a laser em MDF",
+          "Acrílico personalizado",
+          "Letreiros e fachadas em ACM",
+          "Sublimação (canecas, azulejos e almofadas)",
+          "Adesivos e lonas",
+        ].map((s) => ({
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", name: s },
+        })),
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
