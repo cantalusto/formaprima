@@ -45,9 +45,14 @@ const itemVariants = {
 export function HowItWorks() {
   return (
     <section id="como-funciona" className="bg-carvao2 py-[72px] px-6 md:px-12">
-      <h2 className="text-[26px] font-medium tracking-[-0.01em] text-branco mb-10">
-        Como funciona
-      </h2>
+      <div className="mb-10">
+        <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terra">
+          Processo simples
+        </span>
+        <h2 className="mt-3 text-[28px] md:text-[32px] font-semibold tracking-[-0.02em] text-branco leading-tight">
+          Como funciona
+        </h2>
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {steps.map((step, index) => (
@@ -58,10 +63,21 @@ export function HowItWorks() {
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
             variants={itemVariants}
-            className="flex flex-col gap-3.5"
+            className="relative flex flex-col gap-3.5"
           >
-            <div className="w-9 h-9 rounded-full bg-terra text-white text-sm font-medium flex items-center justify-center flex-shrink-0">
-              {step.number}
+            <div className="flex items-center gap-4">
+              <div className="w-9 h-9 rounded-full bg-terra text-white text-sm font-medium flex items-center justify-center flex-shrink-0">
+                {step.number}
+              </div>
+              {index < steps.length - 1 && (
+                <div
+                  className="hidden lg:block flex-1 h-px"
+                  style={{
+                    background:
+                      "linear-gradient(to right, rgba(201,79,44,0.45), rgba(255,255,255,0.06))",
+                  }}
+                />
+              )}
             </div>
             <div className="text-sm font-medium text-branco">{step.title}</div>
             <div className="text-[12.5px] font-light text-grafite leading-[1.7]">

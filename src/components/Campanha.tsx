@@ -1,9 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { AnimatedButton } from "@/components/AnimatedButton";
 
 const cardVariants = {
   hidden: { y: 28, opacity: 0 },
@@ -157,28 +155,6 @@ export function Campanha() {
           <ProductCard key={product.title} product={product} index={index} />
         ))}
       </div>
-
-      <motion.div
-        initial={{ y: 24, opacity: 0 }}
-        whileInView={{ y: 0, opacity: 1 }}
-        viewport={{ once: true, margin: "-40px" }}
-        transition={{ duration: 0.5, ease: "easeOut", delay: 0.15 }}
-        className="mt-10 flex flex-col items-start gap-5 rounded-[20px] bg-carvao2 p-7 md:flex-row md:items-center md:justify-between md:px-10"
-      >
-        <div>
-          <h3 className="text-[20px] font-medium tracking-[-0.01em] text-branco">
-            Vamos juntos impulsionar sua campanha?
-          </h3>
-          <p className="mt-1.5 text-[13px] font-light text-grafite">
-            Sua mensagem, nossa missão. Orçamento sem compromisso.
-          </p>
-        </div>
-        <Link href="/orcamento" className="flex-shrink-0 no-underline">
-          <AnimatedButton className="h-auto whitespace-nowrap rounded-full bg-terra px-7 py-3.5 text-[12.5px] font-medium tracking-[0.05em] text-white hover:opacity-90">
-            Faça seu orçamento
-          </AnimatedButton>
-        </Link>
-      </motion.div>
     </section>
   );
 }

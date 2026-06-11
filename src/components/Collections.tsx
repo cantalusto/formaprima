@@ -98,11 +98,16 @@ export function Collections() {
   return (
     <section id="portfolio" className="bg-creme py-[72px] px-6 md:px-12">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
-        <h2 className="text-[28px] md:text-[32px] font-semibold tracking-[-0.02em] text-carvao leading-tight">
-          Coleções mais
-          <br />
-          pedidas
-        </h2>
+        <div>
+          <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terra">
+            Impressão & corte a laser
+          </span>
+          <h2 className="mt-3 text-[28px] md:text-[32px] font-semibold tracking-[-0.02em] text-carvao leading-tight">
+            Coleções mais
+            <br />
+            pedidas
+          </h2>
+        </div>
         <p className="text-sm text-grafite max-w-[280px] leading-relaxed">
           Descubra as soluções mais solicitadas, com qualidade profissional em
           cada detalhe.

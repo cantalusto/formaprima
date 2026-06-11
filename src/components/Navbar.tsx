@@ -160,18 +160,30 @@ export function Navbar() {
             ))}
           </div>
           <div className="flex flex-col gap-3">
-            <Button
-              variant="outline"
-              className="w-full h-auto py-3 border-white/15 bg-transparent text-white hover:bg-white/[0.06] hover:text-white rounded-full"
+            <Link
+              href="/portfolio"
+              onClick={() => setOpen(false)}
+              className="w-full no-underline"
             >
-              Ver portfólio
-            </Button>
-            <Button
-              className="w-full h-auto py-3 text-white rounded-full border-none"
-              style={{ background: "#C94F2C" }}
+              <Button
+                variant="outline"
+                className="w-full h-auto py-3 border-white/15 bg-transparent text-white hover:bg-white/[0.06] hover:text-white rounded-full"
+              >
+                Ver portfólio
+              </Button>
+            </Link>
+            <Link
+              href="/orcamento"
+              onClick={() => setOpen(false)}
+              className="w-full no-underline"
             >
-              Pedir orçamento
-            </Button>
+              <Button
+                className="w-full h-auto py-3 text-white rounded-full border-none"
+                style={{ background: "#C94F2C" }}
+              >
+                Pedir orçamento
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

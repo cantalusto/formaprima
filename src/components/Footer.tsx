@@ -6,7 +6,7 @@ import { AnimatedButton } from "@/components/AnimatedButton";
 
 const socialLinks = [
   {
-    href: "#",
+    href: "https://www.instagram.com/formaprimaa",
     label: "Instagram",
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -71,23 +71,27 @@ export function Footer() {
               ideias em realidade
             </h2>
             <div className="flex flex-row flex-wrap gap-3 mt-6">
-              <AnimatedButton
-                className="h-auto text-white rounded-full px-6 py-3 text-sm font-medium"
-                style={{ background: "#C94F2C" }}
-              >
-                Iniciar projeto
-              </AnimatedButton>
-              <AnimatedButton
-                variant="outline"
-                className="h-auto rounded-full px-6 py-3 text-sm font-normal"
-                style={{
-                  background: "transparent",
-                  border: "1px solid rgba(0,0,0,0.15)",
-                  color: "#1C1A17",
-                }}
-              >
-                Ver catálogo
-              </AnimatedButton>
+              <Link href="/orcamento" className="no-underline">
+                <AnimatedButton
+                  className="h-auto text-white rounded-full px-6 py-3 text-sm font-medium"
+                  style={{ background: "#C94F2C" }}
+                >
+                  Iniciar projeto
+                </AnimatedButton>
+              </Link>
+              <Link href="/materiais" className="no-underline">
+                <AnimatedButton
+                  variant="outline"
+                  className="h-auto rounded-full px-6 py-3 text-sm font-normal"
+                  style={{
+                    background: "transparent",
+                    border: "1px solid rgba(0,0,0,0.15)",
+                    color: "#1C1A17",
+                  }}
+                >
+                  Ver catálogo
+                </AnimatedButton>
+              </Link>
             </div>
           </div>
 
@@ -145,7 +149,8 @@ export function Footer() {
       {/* Copyright bar */}
       <div className="px-6 md:px-12 py-5 flex flex-col md:flex-row items-center justify-between gap-3 border-t border-black/[0.06]">
         <p className="text-xs text-carvao/40">
-          © 2025 Copyright Todos os direitos reservados
+          © {new Date().getFullYear()} Forma Prima · Todos os direitos
+          reservados
         </p>
         <Link
           href="#"

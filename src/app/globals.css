@@ -64,6 +64,35 @@
     @apply bg-carvao text-branco;
     -webkit-font-smoothing: antialiased;
   }
+
+  ::selection {
+    background: var(--color-terra);
+    color: #ffffff;
+  }
+
+  /* Scrollbar na identidade da marca */
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-grafite2) var(--color-carvao);
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-carvao);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-grafite2);
+    border-radius: 6px;
+    border: 2px solid var(--color-carvao);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-grafite);
+  }
 }
 
 /* Animations */

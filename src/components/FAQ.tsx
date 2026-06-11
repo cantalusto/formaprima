@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 const faqs = [
   {
@@ -93,21 +93,19 @@ function FAQItem({
           </svg>
         </div>
       </button>
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
-            className="overflow-hidden"
-          >
-            <p className="text-sm text-grafite leading-relaxed pb-5 pr-12 max-w-[560px]">
-              {answer}
-            </p>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <div
+        className="grid transition-[grid-template-rows,opacity] duration-300 ease-out"
+        style={{
+          gridTemplateRows: isOpen ? "1fr" : "0fr",
+          opacity: isOpen ? 1 : 0,
+        }}
+      >
+        <div className="overflow-hidden">
+          <p className="text-sm text-grafite leading-relaxed pb-5 pr-12 max-w-[560px]">
+            {answer}
+          </p>
+        </div>
+      </div>
     </motion.div>
   );
 }
@@ -139,7 +137,10 @@ export function FAQ() {
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="text-center mb-10"
         >
-          <h2 className="text-[28px] md:text-[32px] font-semibold tracking-[-0.02em] text-carvao">
+          <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terra">
+            Tire suas dúvidas
+          </span>
+          <h2 className="mt-3 text-[28px] md:text-[32px] font-semibold tracking-[-0.02em] text-carvao">
             Perguntas frequentes
           </h2>
           <p className="text-sm text-grafite mt-2 leading-relaxed">
