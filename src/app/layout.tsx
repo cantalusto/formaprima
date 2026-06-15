@@ -99,7 +99,7 @@ const organizationJsonLd = {
   image: `${siteUrl}/background.png`,
   description:
     "Material de campanha política e marketing digital: santinhos, bandeiras, adesivos, camisas, praguinhas, tráfego pago e gestão de redes sociais. Também impressão customizada em MDF, acrílico, ACM, sublimação e comunicação visual.",
-  telephone: "+55-81-98734-2853",
+  telephone: "+55-81-9268-7656",
   email: "contatoformaprima@gmail.com",
   address: {
     "@type": "PostalAddress",

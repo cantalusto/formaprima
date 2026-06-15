@@ -151,7 +151,7 @@ export default async function Image() {
           }}
         >
           <span style={{ color: CREME, fontSize: 24, fontWeight: 600 }}>
-            @formaprimaa · (81) 9.8734-2853
+            @formaprimaa · (81) 9268-7656
           </span>
           <span style={{ color: GRAFITE, fontSize: 24 }}>Recife · PE</span>
         </div>
