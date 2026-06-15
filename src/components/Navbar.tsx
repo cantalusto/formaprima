@@ -73,7 +73,11 @@ export function Navbar() {
           ? "rgba(28,26,23,0.85)"
           : open
             ? "rgba(28,26,23,0.95)"
-            : "#1C1A17",
+            : "transparent",
+        backdropFilter: scrolled && !open ? "blur(10px)" : "blur(0px)",
+        WebkitBackdropFilter: scrolled && !open ? "blur(10px)" : "blur(0px)",
+        transition:
+          "background-color 0.45s ease, backdrop-filter 0.45s ease, -webkit-backdrop-filter 0.45s ease, border-color 0.3s ease, max-width 0.3s ease, top 0.3s ease, box-shadow 0.3s ease",
       }}
     >
       <nav

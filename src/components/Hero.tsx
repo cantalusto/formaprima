@@ -3,125 +3,63 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { AnimatedButton } from "@/components/AnimatedButton";
-import AnimatedTextCycle from "@/components/ui/animated-text-cycle";
 
-interface MaterialCardProps {
-  name: string;
-  subtitle: string;
-  icon: React.ReactNode;
-  index: number;
-  active: boolean;
-  onActivate: () => void;
-  href?: string;
-}
+const ORANGE = "#E8602C";
+const CREME = "#F5F1EC";
 
-function MaterialListItem({ name, subtitle, icon, index, active, onActivate, href = "/materiais" }: MaterialCardProps) {
-  return (
-    <motion.a
-      href={href}
-      aria-label={`Ver ${name} — ${subtitle}`}
-      initial={{ x: 12, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      transition={{ duration: 0.35, delay: 0.3 + index * 0.08 }}
-      onMouseEnter={onActivate}
-      onFocus={onActivate}
-      className="group relative flex items-center gap-4 no-underline cursor-pointer"
-      style={{
-        padding: "11px 20px",
-        borderBottom: "1px solid rgba(255,255,255,0.06)",
-        borderLeft: active ? "2px solid #C94F2C" : "2px solid rgba(255,255,255,0.08)",
-        background: active ? "rgba(201,79,44,0.06)" : "transparent",
-        transition: "border-color 250ms, background 250ms",
-      }}
-    >
-      <div className="text-terra flex-shrink-0">{icon}</div>
-      <div className="flex flex-col">
-        <span className="text-white text-[15px] font-semibold tracking-[-0.01em] group-hover:text-white/95 transition-colors">
-          {name}
-        </span>
-        <span className="text-[12.5px] mt-0.5" style={{ color: "#B8B0A4" }}>
-          {subtitle}
-        </span>
-      </div>
-      <svg
-        aria-hidden="true"
-        className="ml-auto opacity-0 group-hover:opacity-60 transition-opacity flex-shrink-0"
-        width="14" height="14" viewBox="0 0 12 12" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round"
-      >
-        <path d="M4.5 2.5L8.5 6L4.5 9.5" />
-      </svg>
-    </motion.a>
-  );
-}
+const EASE = [0.2, 0.75, 0.25, 1] as const;
 
-const heroLeftVariants = {
+const fadeUp = {
   hidden: { y: 24, opacity: 0 },
   visible: (i: number) => ({
     y: 0,
     opacity: 1,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut" as const,
-      delay: i * 0.1,
-    },
+    transition: { duration: 0.7, ease: EASE, delay: 0.06 + i * 0.12 },
   }),
 };
 
-const MdfIcon = () => (
-  <svg width="32" height="32" viewBox="0 0 36 36" fill="none">
-    <rect x="4" y="20" width="28" height="5" rx="1" stroke="currentColor" strokeWidth="1.5" />
-    <rect x="4" y="13" width="28" height="5" rx="1" stroke="currentColor" strokeWidth="1.5" />
-    <rect x="4" y="6" width="28" height="5" rx="1" stroke="currentColor" strokeWidth="1.5" />
-    <line x1="10" y1="6" x2="7" y2="3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-    <line x1="32" y1="6" x2="29" y2="3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-    <line x1="32" y1="25" x2="29" y2="28" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-  </svg>
-);
+const materials = [
+  {
+    num: "01",
+    name: "Campanha Política",
+    sub: "Material + tráfego pago",
+    href: "/#campanha",
+  },
+  {
+    num: "02",
+    name: "MDF",
+    sub: "Corte e gravação a laser",
+    href: "/materiais",
+  },
+  {
+    num: "03",
+    name: "Acrílico",
+    sub: "Transparente ou colorido",
+    href: "/materiais",
+  },
+  {
+    num: "04",
+    name: "ACM & Lonas",
+    sub: "Fachadas e placas",
+    href: "/materiais",
+  },
+  {
+    num: "05",
+    name: "Sublimação",
+    sub: "Canecas, azulejos e mais",
+    href: "/materiais",
+  },
+];
 
-const AcrilicoIcon = () => (
-  <svg width="32" height="32" viewBox="0 0 36 36" fill="none">
-    <rect x="5" y="4" width="26" height="28" rx="2" stroke="currentColor" strokeWidth="1.5" />
-    <line x1="5" y1="10" x2="31" y2="10" stroke="currentColor" strokeWidth="1" opacity="0.3" />
-    <line x1="9" y1="4" x2="9" y2="32" stroke="currentColor" strokeWidth="1" opacity="0.2" />
-  </svg>
-);
-
-const TecidoIcon = () => (
-  <svg width="32" height="32" viewBox="0 0 36 36" fill="none">
-    <rect x="3" y="3" width="30" height="30" rx="2" stroke="currentColor" strokeWidth="1.5" />
-    <line x1="3" y1="11" x2="33" y2="11" stroke="currentColor" strokeWidth="1" opacity="0.5" />
-    <line x1="3" y1="19" x2="33" y2="19" stroke="currentColor" strokeWidth="1" opacity="0.5" />
-    <line x1="3" y1="27" x2="33" y2="27" stroke="currentColor" strokeWidth="1" opacity="0.5" />
-    <line x1="11" y1="3" x2="11" y2="33" stroke="currentColor" strokeWidth="1" opacity="0.5" />
-    <line x1="19" y1="3" x2="19" y2="33" stroke="currentColor" strokeWidth="1" opacity="0.5" />
-    <line x1="27" y1="3" x2="27" y2="33" stroke="currentColor" strokeWidth="1" opacity="0.5" />
-  </svg>
-);
-
-const UvIcon = () => (
-  <svg width="32" height="32" viewBox="0 0 36 36" fill="none">
-    <rect x="6" y="4" width="24" height="10" rx="2" stroke="currentColor" strokeWidth="1.5" />
-    <line x1="18" y1="14" x2="18" y2="22" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-    <line x1="11" y1="14" x2="9" y2="22" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-    <line x1="25" y1="14" x2="27" y2="22" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-    <line x1="14" y1="14" x2="13" y2="22" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" opacity="0.5" />
-    <line x1="22" y1="14" x2="23" y2="22" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" opacity="0.5" />
-  </svg>
-);
-
-const CampanhaIcon = () => (
-  <svg width="32" height="32" viewBox="0 0 36 36" fill="none">
-    <path d="M6 14l18-6v14L6 22v-8z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-    <path d="M24 10l5-2v12l-5-2" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-    <line x1="9" y1="22" x2="9" y2="29" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-    <line x1="13" y1="23" x2="13" y2="30" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-  </svg>
-);
+const trust = [
+  "Arte inclusa",
+  "Entrega rápida",
+  "Atendimento direto com o impressor",
+];
 
 export function Hero() {
   const [videoLoaded, setVideoLoaded] = useState(false);
-  const [activeMaterial, setActiveMaterial] = useState(0);
+  const [active, setActive] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -130,14 +68,12 @@ export function Hero() {
 
     const show = () => setVideoLoaded(true);
 
-    // If already ready (cached), show immediately
     if (video.readyState >= 3) {
       show();
       return;
     }
 
     video.addEventListener("playing", show);
-    // Force play attempt
     video.play().catch(() => {});
 
     return () => video.removeEventListener("playing", show);
@@ -145,11 +81,8 @@ export function Hero() {
 
   return (
     <section
-      className="relative overflow-hidden"
-      style={{
-        background: "#1C1A17",
-        minHeight: "calc(100vh - 64px)",
-      }}
+      className="relative flex flex-col overflow-hidden -mt-16"
+      style={{ background: "#0B0A09", minHeight: "100vh" }}
     >
       {/* Fallback image — visible until video is ready */}
       <div
@@ -175,154 +108,256 @@ export function Hero() {
         className="absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-700"
         style={{ opacity: videoLoaded ? 1 : 0 }}
       />
-      {/* Dark overlay for text readability — stronger on mobile */}
-      <div
-        className="absolute inset-0 z-10 pointer-events-none lg:hidden"
-        style={{
-          background:
-            "linear-gradient(to bottom, rgba(18,16,14,0.88), rgba(18,16,14,0.65) 45%, rgba(18,16,14,0.92))",
-        }}
-      />
-      <div
-        className="absolute inset-0 z-10 pointer-events-none hidden lg:block"
-        style={{
-          background:
-            "linear-gradient(to bottom, rgba(18,16,14,0.78), rgba(18,16,14,0.50) 45%, rgba(18,16,14,0.85))",
-        }}
-      />
-      {/* Left-side vignette for desktop */}
-      <div
-        className="absolute inset-0 z-10 pointer-events-none hidden lg:block"
-        style={{
-          background:
-            "linear-gradient(to right, rgba(18,16,14,0.7) 0%, rgba(18,16,14,0.25) 55%, transparent 80%)",
-        }}
-      />
-      <div
-        className="relative z-20 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-end px-6 pb-16 pt-24 md:px-12 lg:px-12 lg:items-center"
-        style={{ minHeight: "calc(100vh - 64px)" }}
-      >
-      {/* Left side */}
-      <div className="flex flex-col">
-        <motion.a
-          href="/#campanha"
-          initial={{ y: 16, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="group inline-flex items-center gap-2 self-start rounded-full px-3.5 py-1.5 mb-5 no-underline"
-          style={{
-            background: "rgba(201,79,44,0.12)",
-            border: "1px solid rgba(201,79,44,0.32)",
-          }}
-        >
-          <span className="w-1.5 h-1.5 rounded-full bg-terra" />
-          <span className="text-[12px] font-semibold tracking-[0.03em] text-terra">
-            Eleições 2026 · Material de campanha + tráfego pago
-          </span>
-          <span className="text-terra/70 transition-transform group-hover:translate-x-0.5">→</span>
-        </motion.a>
-        <motion.h1
-          custom={0}
-          initial="hidden"
-          animate="visible"
-          variants={heroLeftVariants}
-          className="relative"
-          style={{
-            fontSize: "clamp(38px, 4.5vw, 52px)",
-            fontWeight: 700,
-            lineHeight: 1.15,
-            letterSpacing: "-0.02em",
-          }}
-        >
-          <span style={{ color: "#F0ECE6" }}>
-            Impressão personalizada
-          </span>
-          <br />
-          <AnimatedTextCycle
-            words={[
-              "em MDF.",
-              "em acrílico.",
-              "em ACM.",
-              "para sua loja.",
-              "para presentear.",
-              "sob medida.",
-            ]}
-            interval={3000}
-            className="text-terra"
-          />
-        </motion.h1>
 
-        <motion.p
-          custom={1}
-          initial="hidden"
-          animate="visible"
-          variants={heroLeftVariants}
-          style={{
-            color: "#D4CEC4",
-            fontSize: "15px",
-            fontWeight: 400,
-            lineHeight: 1.7,
-            marginTop: "20px",
-            maxWidth: "420px",
-          }}
-        >
-          Corte a laser, letreiros, placas, caixas, sublimação e comunicação
-          visual. E para candidatos: material de campanha completo —
-          santinhos, bandeiras, adesivos, camisas — junto com marketing
-          digital e tráfego pago para conquistar votos dentro e fora das ruas.
-        </motion.p>
-
-        <motion.div
-          custom={2}
-          initial="hidden"
-          animate="visible"
-          variants={heroLeftVariants}
-          className="flex flex-row flex-wrap items-center"
-          style={{ marginTop: "36px", gap: "24px" }}
-        >
-          <Link href="/orcamento" className="no-underline">
-            <AnimatedButton
-              className="h-auto text-white rounded-full px-8 py-4 text-[15px] font-semibold shadow-lg shadow-terra/30 hover:shadow-terra/50 transition-shadow"
-              style={{ background: "#C94F2C" }}
-            >
-              Pedir orçamento →
-            </AnimatedButton>
-          </Link>
-          <a
-            href="/portfolio"
-            className="text-[14px] font-medium text-white/80 hover:text-terra no-underline inline-flex items-center gap-1.5 group transition-colors"
+      {/* Horizontal gradient — dark on the left for legibility, video breathes on the right */}
+      <div
+        className="absolute inset-0 z-[1] pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(96deg, rgba(11,10,9,0.96) 0%, rgba(11,10,9,0.86) 26%, rgba(11,10,9,0.45) 58%, rgba(11,10,9,0.18) 100%)",
+        }}
+      />
+      {/* Vertical gradient — anchors top nav and bottom strip */}
+      <div
+        className="absolute inset-0 z-[1] pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(11,10,9,0.75) 0%, rgba(11,10,9,0.10) 16%, rgba(11,10,9,0) 42%, rgba(11,10,9,0.55) 82%, rgba(11,10,9,0.92) 100%)",
+        }}
+      />
+      {/* CONTENT */}
+      <div className="relative z-[5] flex-1 flex items-center px-6 md:px-12 lg:px-16 pt-16 pb-12">
+        <div className="max-w-[680px]">
+          {/* Eyebrow */}
+          <motion.div
+            custom={0}
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
           >
-            Ver portfólio
-            <span className="inline-block transition-transform group-hover:translate-x-0.5">→</span>
-          </a>
-        </motion.div>
+            <Link
+              href="/#campanha"
+              className="group inline-flex items-center gap-3 no-underline"
+              style={{
+                padding: "9px 9px 9px 16px",
+                border: "1px solid rgba(232,96,44,0.35)",
+                background: "rgba(232,96,44,0.08)",
+                borderRadius: "100px",
+              }}
+            >
+              <span
+                className="flex-shrink-0"
+                style={{
+                  width: "8px",
+                  height: "8px",
+                  borderRadius: "50%",
+                  background: ORANGE,
+                  animation: "pulse-dot 1.8s ease-in-out infinite",
+                }}
+              />
+              <span
+                className="text-[12.5px] md:text-[13.5px] font-semibold tracking-[0.02em] leading-[1.35]"
+                style={{ color: "#F6C9B4" }}
+              >
+                Eleições 2026 · Material de campanha + tráfego pago
+              </span>
+              <span
+                className="inline-flex items-center justify-center flex-shrink-0 transition-transform group-hover:translate-x-0.5"
+                style={{
+                  width: "26px",
+                  height: "26px",
+                  borderRadius: "50%",
+                  background: "rgba(232,96,44,0.18)",
+                  color: ORANGE,
+                  fontSize: "14px",
+                }}
+              >
+                →
+              </span>
+            </Link>
+          </motion.div>
+
+          {/* Headline */}
+          <motion.h1
+            custom={1}
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            className="mt-6 md:mt-7 text-[clamp(34px,8.6vw,48px)] md:text-[clamp(46px,6vw,84px)]"
+            style={{
+              fontFamily: "var(--font-display), sans-serif",
+              fontWeight: 800,
+              lineHeight: 0.99,
+              letterSpacing: "-0.025em",
+              color: CREME,
+              textWrap: "balance",
+            }}
+          >
+            Impressão que <span style={{ color: ORANGE }}>dá forma</span> à sua
+            marca.
+          </motion.h1>
+
+          {/* Subtitle */}
+          <motion.p
+            custom={2}
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            className="mt-5 md:mt-6 max-w-full md:max-w-[540px] text-[16px] md:text-[18px]"
+            style={{
+              lineHeight: 1.6,
+              color: "rgba(245,241,236,0.74)",
+              textWrap: "pretty",
+            }}
+          >
+            Corte a laser, ACM, letreiros, sublimação e comunicação visual. Para
+            campanhas: material completo + marketing digital e{" "}
+            <span style={{ color: CREME, fontWeight: 600 }}>tráfego pago</span>{" "}
+            para conquistar votos dentro e fora das ruas.
+          </motion.p>
+
+          {/* CTAs */}
+          <motion.div
+            custom={3}
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            className="flex flex-col md:flex-row md:flex-wrap gap-3 md:gap-3.5 mt-7 md:mt-9"
+          >
+            <Link
+              href="/orcamento"
+              className="inline-flex items-center justify-center gap-2.5 no-underline transition-transform hover:-translate-y-0.5 w-full md:w-auto"
+              style={{
+                background: ORANGE,
+                color: "#180C06",
+                fontWeight: 700,
+                fontSize: "16px",
+                padding: "17px 28px",
+                borderRadius: "14px",
+                boxShadow: "0 14px 34px -10px rgba(232,96,44,0.7)",
+              }}
+            >
+              Pedir orçamento <span style={{ fontSize: "17px" }}>→</span>
+            </Link>
+            <Link
+              href="/portfolio"
+              className="inline-flex items-center justify-center gap-2.5 no-underline transition-colors w-full md:w-auto"
+              style={{
+                color: CREME,
+                fontWeight: 600,
+                fontSize: "16px",
+                padding: "17px 26px",
+                borderRadius: "14px",
+                border: "1px solid rgba(245,241,236,0.22)",
+                background: "rgba(245,241,236,0.03)",
+              }}
+            >
+              Ver portfólio <span style={{ fontSize: "17px" }}>→</span>
+            </Link>
+          </motion.div>
+
+          {/* Value props */}
+          <motion.div
+            custom={4}
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            className="flex flex-wrap items-center gap-x-5 gap-y-2.5 mt-7"
+            style={{
+              fontSize: "13.5px",
+              fontWeight: 500,
+              color: "rgba(245,241,236,0.5)",
+            }}
+          >
+            {trust.map((item) => (
+              <span key={item} className="inline-flex items-center gap-2">
+                <span
+                  style={{
+                    width: "5px",
+                    height: "5px",
+                    borderRadius: "50%",
+                    background: ORANGE,
+                  }}
+                />
+                {item}
+              </span>
+            ))}
+          </motion.div>
+        </div>
       </div>
 
-      {/* Right side - Vertical list with left border accent */}
-      <div
-        className="flex flex-col rounded-2xl overflow-hidden [&>*:last-child]:border-b-0 lg:ml-auto lg:min-w-[300px]"
-        style={{ background: "rgba(28,26,23,0.45)", backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)", border: "1px solid rgba(255,255,255,0.08)" }}
+      {/* MATERIALS STRIP */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: EASE, delay: 0.66 }}
+        className="fp-strip relative z-[5] flex items-stretch overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none"
+        style={{
+          borderTop: "1px solid rgba(245,241,236,0.1)",
+          background: "rgba(12,11,10,0.55)",
+          backdropFilter: "blur(16px)",
+          WebkitBackdropFilter: "blur(16px)",
+        }}
       >
-        {[
-          { name: "Campanha Política", subtitle: "Material + marketing digital", icon: <CampanhaIcon />, href: "/#campanha" },
-          { name: "MDF", subtitle: "Corte e gravação a laser", icon: <MdfIcon /> },
-          { name: "Acrílico", subtitle: "Transparente ou colorido", icon: <AcrilicoIcon /> },
-          { name: "ACM & Lonas", subtitle: "Fachadas e placas", icon: <TecidoIcon /> },
-          { name: "Sublimação", subtitle: "Canecas, azulejos e almofadas", icon: <UvIcon /> },
-        ].map((item, i) => (
-          <MaterialListItem
-            key={item.name}
-            name={item.name}
-            subtitle={item.subtitle}
-            icon={item.icon}
-            index={i}
-            active={activeMaterial === i}
-            onActivate={() => setActiveMaterial(i)}
-            href={item.href}
-          />
-        ))}
-      </div>
-      </div>
+        {materials.map((m, i) => {
+          const isActive = i === active;
+          return (
+            <Link
+              key={m.num}
+              href={m.href}
+              onMouseEnter={() => setActive(i)}
+              onFocus={() => setActive(i)}
+              className="grow-0 shrink-0 basis-auto min-w-[168px] snap-start md:grow md:shrink md:basis-0 md:min-w-0 md:snap-align-none flex gap-3.5 items-start no-underline"
+              style={{
+                padding: "22px clamp(16px,1.8vw,26px)",
+                borderLeft:
+                  i === 0 ? "none" : "1px solid rgba(245,241,236,0.08)",
+                borderTop: isActive
+                  ? `2px solid ${ORANGE}`
+                  : "2px solid transparent",
+                background: isActive
+                  ? "linear-gradient(180deg, rgba(232,96,44,0.16), rgba(232,96,44,0))"
+                  : "transparent",
+                transition: "background .35s ease, border-color .35s ease",
+              }}
+            >
+              <span
+                className="flex-shrink-0"
+                style={{
+                  fontSize: "12px",
+                  fontWeight: 700,
+                  letterSpacing: "0.05em",
+                  marginTop: "3px",
+                  color: isActive ? ORANGE : "rgba(232,96,44,0.5)",
+                  transition: "color .35s ease",
+                }}
+              >
+                {m.num}
+              </span>
+              <div className="flex flex-col gap-[3px] min-w-0">
+                <div
+                  style={{
+                    fontFamily: "var(--font-display), sans-serif",
+                    fontSize: "17px",
+                    fontWeight: 700,
+                    whiteSpace: "nowrap",
+                    color: isActive ? CREME : "rgba(245,241,236,0.82)",
+                    transition: "color .35s ease",
+                  }}
+                >
+                  {m.name}
+                </div>
+                <div
+                  className="text-[12.5px] font-medium whitespace-nowrap overflow-hidden text-ellipsis"
+                  style={{ color: "rgba(245,241,236,0.48)" }}
+                >
+                  {m.sub}
+                </div>
+              </div>
+            </Link>
+          );
+        })}
+      </motion.div>
     </section>
   );
 }

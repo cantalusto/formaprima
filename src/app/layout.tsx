@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Sans, DM_Mono } from "next/font/google";
+import { DM_Sans, DM_Mono, Bricolage_Grotesque } from "next/font/google";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import "./globals.css";
 
@@ -13,6 +13,12 @@ const dmMono = DM_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
   weight: ["400", "500"],
+});
+
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["600", "700", "800"],
 });
 
 const siteUrl = "https://formaprima.com.br";
@@ -170,7 +176,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${dmSans.variable} ${dmMono.variable} antialiased`}
+      className={`${dmSans.variable} ${dmMono.variable} ${bricolage.variable} antialiased`}
     >
       <body className="bg-carvao text-branco font-sans overflow-x-hidden">
         <script

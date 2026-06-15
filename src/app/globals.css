@@ -18,6 +18,7 @@
   /* Fontes */
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
+  --font-display: var(--font-display);
 
   /* Radius */
   --radius-sm: 6px;
@@ -139,5 +140,29 @@
   }
   to {
     transform: translate(-4%, 2%) rotate(-1.5deg);
+  }
+}
+
+/* Barra de materiais da Hero — esconde a scrollbar no carrossel mobile */
+.fp-strip {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.fp-strip::-webkit-scrollbar {
+  height: 0;
+  width: 0;
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(232, 96, 44, 0.55);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.7);
+    box-shadow: 0 0 0 6px rgba(232, 96, 44, 0);
   }
 }
