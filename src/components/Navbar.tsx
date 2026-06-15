@@ -59,7 +59,8 @@ export function Navbar() {
   }, [open]);
 
   return (
-    <header
+    <>
+      <header
       className={cn(
         "sticky top-0 z-50 mx-auto w-full max-w-6xl border-b border-transparent md:rounded-md md:border md:duration-300 md:ease-out md:transition-[max-width,top,box-shadow,border-color]",
         {
@@ -74,8 +75,8 @@ export function Navbar() {
           : open
             ? "rgba(28,26,23,0.95)"
             : "transparent",
-        backdropFilter: scrolled && !open ? "blur(10px)" : "blur(0px)",
-        WebkitBackdropFilter: scrolled && !open ? "blur(10px)" : "blur(0px)",
+        backdropFilter: open || scrolled ? "blur(12px)" : "blur(0px)",
+        WebkitBackdropFilter: open || scrolled ? "blur(12px)" : "blur(0px)",
         transition:
           "background-color 0.45s ease, backdrop-filter 0.45s ease, -webkit-backdrop-filter 0.45s ease, border-color 0.3s ease, max-width 0.3s ease, top 0.3s ease, box-shadow 0.3s ease",
       }}
@@ -132,6 +133,7 @@ export function Navbar() {
           <MenuToggleIcon open={open} className="size-5" duration={300} />
         </Button>
       </nav>
+      </header>
 
       {/* Mobile menu */}
       <div
@@ -139,7 +141,11 @@ export function Navbar() {
           "fixed top-16 right-0 bottom-0 left-0 z-50 flex flex-col overflow-hidden border-t border-white/[0.06] md:hidden",
           open ? "block" : "hidden"
         )}
-        style={{ background: "rgba(28,26,23,0.97)" }}
+        style={{
+          background: "rgba(18,16,13,0.96)",
+          backdropFilter: "blur(18px)",
+          WebkitBackdropFilter: "blur(18px)",
+        }}
       >
         <div
           data-slot={open ? "open" : "closed"}
@@ -191,6 +197,6 @@ export function Navbar() {
           </div>
         </div>
       </div>
-    </header>
+    </>
   );
 }
