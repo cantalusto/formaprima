@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -33,6 +34,8 @@ const materials = [
     ],
     bgColor: "#E8C99A",
     textColor: "#6A4820",
+    image: "/portfolio/wifimdf.jpg",
+    imageAlt: "Quadrinho de Wi-Fi em MDF cortado a laser",
   },
   {
     name: "Acrílico",
@@ -48,6 +51,8 @@ const materials = [
     ],
     bgColor: "#D8EEF7",
     textColor: "#2A6A88",
+    image: "/portfolio/Letras grandes decorativas.jpeg",
+    imageAlt: "Letras decorativas grandes em acrílico",
   },
   {
     name: "ACM, Lonas & Adesivos",
@@ -63,6 +68,8 @@ const materials = [
     ],
     bgColor: "#F0E8E0",
     textColor: "#7A6050",
+    image: "/materiais/acm.jpg",
+    imageAlt: "Letreiro iluminado em fachada de loja",
   },
   {
     name: "Sublimação",
@@ -77,6 +84,8 @@ const materials = [
     ],
     bgColor: "#1C1A17",
     textColor: "#C94F2C",
+    image: "/materiais/sublimacao.jpg",
+    imageAlt: "Caneca personalizada por sublimação",
     dark: true,
   },
 ];
@@ -115,21 +124,26 @@ export default function MateriaisPage() {
               >
                 {/* Visual */}
                 <div
-                  className="flex items-center justify-center p-12 md:p-16"
+                  className="relative overflow-hidden"
                   style={{ background: mat.bgColor, minHeight: "280px" }}
                 >
-                  <div className="text-center">
-                    <span
-                      className="text-[11px] font-semibold tracking-[0.2em] uppercase"
-                      style={{ color: mat.textColor }}
-                    >
-                      {mat.name}
-                    </span>
-                    <div
-                      className="w-20 h-px mx-auto mt-3"
-                      style={{ background: mat.textColor, opacity: 0.3 }}
-                    />
-                  </div>
+                  <Image
+                    src={mat.image}
+                    alt={mat.imageAlt}
+                    fill
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    className="object-cover"
+                  />
+                  <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                      background:
+                        "linear-gradient(to top, rgba(15,13,10,0.5) 0%, rgba(15,13,10,0.05) 55%, rgba(15,13,10,0) 100%)",
+                    }}
+                  />
+                  <span className="absolute bottom-4 left-5 text-[11px] font-semibold tracking-[0.2em] uppercase text-white/95 drop-shadow">
+                    {mat.name}
+                  </span>
                 </div>
                 {/* Info */}
                 <div
