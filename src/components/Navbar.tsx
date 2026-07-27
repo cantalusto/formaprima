@@ -9,6 +9,7 @@ import { MenuToggleIcon } from "@/components/ui/menu-toggle-icon";
 import { useScroll } from "@/components/ui/use-scroll";
 
 const links = [
+  { href: "/revendedor", label: "Revendedor", destaque: true },
   { href: "/materiais", label: "Materiais" },
   { href: "/#campanha", label: "Campanha" },
   { href: "/portfolio", label: "Portfólio" },
@@ -96,12 +97,20 @@ export function Navbar() {
               href={link.href}
               className={cn(
                 buttonVariants({ variant: "ghost", size: "default" }),
-                "group relative text-[13px] font-medium text-[#C8C2B6] hover:text-[#E8C99A] hover:bg-transparent no-underline transition-colors"
+                "group relative text-[13px] font-medium hover:bg-transparent no-underline transition-colors",
+                link.destaque
+                  ? "text-terra hover:text-terra2 font-semibold"
+                  : "text-[#C8C2B6] hover:text-[#E8C99A]"
               )}
             >
               <span className="relative">
                 {link.label}
-                <span className="absolute left-0 -bottom-0.5 h-px w-0 bg-[#E8C99A] transition-all duration-300 group-hover:w-full" />
+                <span
+                  className={cn(
+                    "absolute left-0 -bottom-0.5 h-px w-0 transition-all duration-300 group-hover:w-full",
+                    link.destaque ? "bg-terra" : "bg-[#E8C99A]"
+                  )}
+                />
               </span>
             </Link>
           ))}
@@ -162,7 +171,10 @@ export function Navbar() {
                 onClick={() => setOpen(false)}
                 className={cn(
                   buttonVariants({ variant: "ghost" }),
-                  "justify-start text-[15px] font-medium text-[#D4CEC4] hover:text-[#E8C99A] hover:bg-white/[0.06] no-underline"
+                  "justify-start text-[15px] font-medium hover:bg-white/[0.06] no-underline",
+                  link.destaque
+                    ? "text-terra font-semibold hover:text-terra2"
+                    : "text-[#D4CEC4] hover:text-[#E8C99A]"
                 )}
               >
                 {link.label}

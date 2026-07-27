@@ -39,9 +39,9 @@ const materials = [
   },
   {
     num: "04",
-    name: "ACM & Lonas",
-    sub: "Fachadas e placas",
-    href: "/materiais",
+    name: "Lona & Adesivo",
+    sub: "Bureau para revendedor",
+    href: "/revendedor",
   },
   {
     num: "05",
