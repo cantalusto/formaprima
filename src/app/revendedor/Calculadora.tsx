@@ -13,6 +13,8 @@ import {
   type CategoriaId,
 } from "@/lib/precos";
 import { PIX_CHAVE, linkWhatsApp } from "@/lib/contato";
+import { blocoDados, type DadosRevendedor } from "@/lib/revendedor";
+import { ModalDados } from "./ModalDados";
 
 const CATEGORIAS: { id: CategoriaId; nome: string; detalhe: string }[] = [
   { id: "lona", nome: "Lona", detalhe: "380g e 440g" },
@@ -91,6 +93,7 @@ export function Calculadora() {
   const [largura, setLargura] = useState("1");
   const [altura, setAltura] = useState("1");
   const [quantidade, setQuantidade] = useState("1");
+  const [modalAberto, setModalAberto] = useState(false);
 
   const entrada = {
     categoria,
@@ -108,18 +111,34 @@ export function Calculadora() {
    *  orçamento zerado no WhatsApp da gráfica. */
   const pedidoValido = temMedida && r.total > 0;
 
-  const mensagem = [
-    "Olá, Forma Prima! Quero fechar um pedido pela área de revendedor 👇",
-    "",
+  const medidaTexto = `${largura.replace(".", ",")}m × ${altura.replace(
+    ".",
+    ","
+  )}m · ${Math.max(1, entrada.quantidade || 1)}x`;
+
+  const blocoPedido = [
+    "*PEDIDO*",
     `*Produto:* ${r.descricao}`,
     `*Medida:* ${largura.replace(".", ",")}m × ${altura.replace(".", ",")}m`,
     `*Quantidade:* ${Math.max(1, entrada.quantidade || 1)}`,
     `*Área cobrada:* ${m2(r.areaCobrada)} por peça`,
     `*Valor por m²:* ${brl(r.precoM2)}`,
     `*Total estimado:* ${brl(r.total)}`,
-    "",
-    "Vou enviar a arte por aqui. Pode confirmar o prazo e o pagamento?",
   ].join("\n");
+
+  /** Mensagem final já identificada com os dados do revendedor. */
+  const montarLink = (dados: DadosRevendedor, entrega: string) =>
+    linkWhatsApp(
+      [
+        "Olá, Forma Prima! Quero fechar um pedido pela área de revendedor 👇",
+        "",
+        blocoDados(dados, entrega),
+        "",
+        blocoPedido,
+        "",
+        "Vou enviar a arte por aqui. Pode confirmar o prazo e o pagamento?",
+      ].join("\n")
+    );
 
   return (
     <div
@@ -274,18 +293,12 @@ export function Calculadora() {
             </p>
           )}
 
-          <a
-            href={pedidoValido ? linkWhatsApp(mensagem) : undefined}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-disabled={!pedidoValido}
-            onClick={(e) => {
-              if (!pedidoValido) e.preventDefault();
-            }}
-            className={`mt-5 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold text-white no-underline transition-opacity ${
-              pedidoValido
-                ? "hover:opacity-90"
-                : "pointer-events-none opacity-40"
+          <button
+            type="button"
+            disabled={!pedidoValido}
+            onClick={() => setModalAberto(true)}
+            className={`mt-5 inline-flex cursor-pointer items-center justify-center gap-2 rounded-full border-none px-6 py-3.5 text-sm font-semibold text-white transition-opacity ${
+              pedidoValido ? "hover:opacity-90" : "cursor-not-allowed opacity-40"
             }`}
             style={{ background: "#25D366" }}
           >
@@ -299,7 +312,7 @@ export function Calculadora() {
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
             </svg>
             Fechar pedido no WhatsApp
-          </a>
+          </button>
 
           <p className="mt-3 text-center text-[11px] leading-snug text-grafite2">
             {pedidoValido
@@ -308,6 +321,17 @@ export function Calculadora() {
           </p>
         </motion.div>
       </div>
+
+      <ModalDados
+        aberto={modalAberto}
+        onFechar={() => setModalAberto(false)}
+        resumo={{
+          descricao: r.descricao,
+          medida: medidaTexto,
+          total: brl(r.total),
+        }}
+        montarLink={montarLink}
+      />
     </div>
   );
 }
