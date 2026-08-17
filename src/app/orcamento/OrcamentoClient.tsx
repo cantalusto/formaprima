@@ -94,16 +94,6 @@ export default function OrcamentoClient() {
     : 0;
   const totalPrice = unitPrice * (selectedQty?.value || 1);
 
-  const canProceed =
-    (step === 0 && material) ||
-    (step === 1 && size) ||
-    (step === 2 && quantity) ||
-    step === 3;
-
-  function next() {
-    if (step < 3 && canProceed) setStep(step + 1);
-  }
-
   function back() {
     if (step > 0) setStep(step - 1);
   }

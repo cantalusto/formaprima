@@ -14,6 +14,7 @@ import {
 } from "@/lib/precos";
 import { PIX_CHAVE, linkWhatsApp } from "@/lib/contato";
 import { blocoDados, type DadosRevendedor } from "@/lib/revendedor";
+import { criarPedido } from "@/lib/pedidos";
 import { ModalDados } from "./ModalDados";
 
 const CATEGORIAS: { id: CategoriaId; nome: string; detalhe: string }[] = [
@@ -331,6 +332,22 @@ export function Calculadora() {
           total: brl(r.total),
         }}
         montarLink={montarLink}
+        onCriarPedido={(dados, entrega) =>
+          criarPedido({
+            origem: "online",
+            cliente: dados,
+            entrega,
+            item: {
+              descricao: r.descricao,
+              largura: entrada.largura,
+              altura: entrada.altura,
+              quantidade: Math.max(1, entrada.quantidade || 1),
+              areaCobrada: r.areaCobrada,
+              precoM2: r.precoM2,
+              total: r.total,
+            },
+          }).codigo
+        }
       />
     </div>
   );

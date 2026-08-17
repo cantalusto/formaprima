@@ -7,6 +7,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { MenuToggleIcon } from "@/components/ui/menu-toggle-icon";
 import { useScroll } from "@/components/ui/use-scroll";
+import { LogIn } from "lucide-react";
 
 const links = [
   { href: "/revendedor", label: "Revendedor", destaque: true },
@@ -115,6 +116,14 @@ export function Navbar() {
             </Link>
           ))}
 
+          <Link
+            href="/login"
+            className="ml-1 inline-flex h-9 items-center gap-2 rounded-full border border-white/15 px-4 text-[13px] font-semibold text-[#E8C99A] no-underline transition-colors hover:border-terra/60 hover:bg-terra/10 hover:text-white"
+          >
+            <LogIn aria-hidden="true" className="size-4" strokeWidth={1.8} />
+            Entrar
+          </Link>
+
           <div
             className={cn(
               "ml-2 transition-all duration-300 ease-out overflow-hidden",
@@ -182,6 +191,14 @@ export function Navbar() {
             ))}
           </div>
           <div className="flex flex-col gap-3">
+            <Link
+              href="/login"
+              onClick={() => setOpen(false)}
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-terra/40 bg-terra/10 py-3 text-sm font-semibold text-ambar no-underline"
+            >
+              <LogIn aria-hidden="true" className="size-4" strokeWidth={1.8} />
+              Entrar na plataforma
+            </Link>
             <Link
               href="/portfolio"
               onClick={() => setOpen(false)}

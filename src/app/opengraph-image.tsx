@@ -46,7 +46,6 @@ export default async function Image() {
       >
         {/* Header: logo + brand */}
         <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={logoSrc} height={62} alt="Forma Prima" />
           <div style={{ display: "flex", flexDirection: "column", lineHeight: 1 }}>
             <span
